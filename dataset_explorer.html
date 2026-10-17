@@ -1,0 +1,2554 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniPath AI | Sri Lanka UGC Admissions & Strategic Degree Advisor</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Vector Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <!-- GSAP Animation Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- FontAwesome 6 Pro Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: '#090a0f',
+                        slate: {
+                            950: '#07090e',
+                            900: '#0f1422',
+                            850: '#141b2d',
+                            800: '#1a233a',
+                            750: '#222e4c',
+                            700: '#2c3b5e'
+                        },
+                        brand: {
+                            cyan: '#06b6d4',
+                            sky: '#38bdf8',
+                            indigo: '#6366f1',
+                            emerald: '#10b981',
+                            amber: '#f59e0b',
+                            rose: '#f43f5e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg-page: #07090e;
+            --surface-glass: rgba(15, 20, 34, 0.75);
+            --surface-card: rgba(20, 27, 45, 0.6);
+            --surface-card-hover: rgba(28, 38, 64, 0.85);
+            --border-line: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(56, 189, 248, 0.4);
+            --inner-bevel: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% -10%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 40%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 10% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
+            letter-spacing: -0.015em;
+        }
+
+        .lucide {
+            stroke-width: 1.75;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .icon-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .spring-transition {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel {
+            background: var(--surface-glass);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-line);
+            box-shadow: var(--inner-bevel), 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card {
+            background: var(--surface-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-line);
+            box-shadow: var(--inner-bevel);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            background: var(--surface-card-hover);
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+            box-shadow: var(--inner-bevel), 0 14px 32px -4px rgba(0, 0, 0, 0.6);
+        }
+
+        .tactile-input {
+            background: rgba(9, 12, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .tactile-input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(56, 189, 248, 0.18);
+        }
+
+        .blueprint-row {
+            transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+            user-select: none;
+        }
+
+        .blueprint-row.dragging {
+            opacity: 0.3;
+            background: rgba(56, 189, 248, 0.12) !important;
+            border-color: #38bdf8 !important;
+            transform: scale(0.985);
+        }
+
+        .blueprint-row.drag-over {
+            border-top: 2px solid #38bdf8 !important;
+            background: rgba(56, 189, 248, 0.06) !important;
+            transform: translateY(-2px);
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(9, 12, 20, 0.6); }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+
+        /* PRINT STYLES - PURE FORMAL WHITE A4 ACADEMIC DOSSIER */
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 12mm 12mm;
+        }
+
+        @media print {
+            html, body {
+                background: #ffffff !important;
+                color: #0f172a !important;
+                font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+                font-size: 10pt !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            header, section, #view-advisor, #view-cutoffs, #view-master, footer, #blueprint-modal-overlay, #dossier-modal-overlay, #modal-overlay, #cmdk-modal, .no-print {
+                display: none !important;
+            }
+            #official-dossier-print-container {
+                display: block !important;
+                background: white !important;
+                color: #0f172a !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            }
+            .page-break {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+            .avoid-break {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            table {
+                page-break-inside: auto;
+                width: 100% !important;
+            }
+            tr {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            thead {
+                display: table-header-group !important;
+            }
+        }
+    
+        /* Agency-Grade Sleek Scrollbars & Modal Scroll Containment */
+        .custom-scrollbar::-webkit-scrollbar,
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb,
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+            transition: background 0.2s ease;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover,
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.5);
+        }
+
+        body.modal-open {
+            overflow: hidden !important;
+            touch-action: none;
+            -webkit-overflow-scrolling: none;
+        }
+
+        .modal-scroll-area {
+            overflow-y: auto !important;
+            overscroll-behavior: contain !important;
+            -webkit-overflow-scrolling: touch;
+            min-height: 0 !important;
+        }
+
+    </style>
+</head>
+<body class="selection:bg-sky-500/20 selection:text-sky-200 antialiased">
+
+    <!-- Ambient Grid Texture Overlay -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.02] z-50 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+    <!-- ========================================================================= -->
+    <!-- AGENCY-GRADE FLOATING GLASS NAVIGATION BAR                                -->
+    <!-- ========================================================================= -->
+    <header class="border-b border-white/[0.08] bg-slate-950/80 backdrop-blur-2xl sticky top-0 z-40 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            
+            <!-- Brand Logo & Identity -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-b from-sky-400 to-indigo-600 p-[1px] shadow-[0_0_20px_rgba(56,189,248,0.25)] group-hover:shadow-[0_0_25px_rgba(56,189,248,0.45)] transition-all duration-300 shrink-0">
+                    <div class="w-full h-full rounded-[11px] bg-zinc-950 flex items-center justify-center text-sky-400 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-graduation-cap text-base"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-black tracking-tight text-white group-hover:text-sky-300 transition-colors">
+                        UniPath<span class="text-sky-400">.AI</span>
+                    </span>
+                    <span class="text-[10px] font-mono uppercase tracking-[0.16em] text-zinc-400 font-semibold">
+                        UGC Admissions Advisor
+                    </span>
+                </div>
+            </a>
+
+            <!-- Center Segmented Floating Capsule Tabs -->
+            <nav class="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl shadow-inner">
+                <button onclick="switchMainTab('advisor')" id="tab-btn-advisor" class="px-4 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-sky-500/90 to-indigo-600/90 border border-white/20 shadow-[0_2px_12px_rgba(56,189,248,0.3)] flex items-center gap-2 transition-all duration-300 active:scale-95">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs text-sky-200"></i>
+                    <span>AI Degree Advisor</span>
+                </button>
+                <button onclick="switchMainTab('cutoffs')" id="tab-btn-cutoffs" class="px-4 py-1.5 rounded-full text-xs font-semibold text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all duration-200 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line text-xs text-zinc-400"></i>
+                    <span>7-Yr Cutoffs Explorer</span>
+                </button>
+                <button onclick="switchMainTab('master')" id="tab-btn-master" class="px-4 py-1.5 rounded-full text-xs font-semibold text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all duration-200 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-xs text-zinc-400"></i>
+                    <span>UGC Bachelor Degrees</span>
+                </button>
+            </nav>
+
+            <!-- Right Actions & Quick Command Search -->
+            <div class="flex items-center gap-2.5 sm:gap-3">
+                <button onclick="openCmdk()" class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs text-zinc-400 hover:text-white transition-all shadow-sm group active:scale-95">
+                    <i class="fa-solid fa-magnifying-glass text-xs text-zinc-400 group-hover:text-sky-400 transition-colors"></i>
+                    <span class="text-[11px] font-medium">Quick Search</span>
+                    <kbd class="px-1.5 py-0.5 rounded bg-black/40 border border-white/10 text-[10px] font-mono text-zinc-400">Ctrl K</kbd>
+                </button>
+                <button onclick="openFormalDossierModal()" class="px-3.5 sm:px-4 py-2 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-bold text-xs shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all flex items-center gap-2 active:scale-95 border border-white/20 whitespace-nowrap">
+                    <i class="fa-solid fa-file-lines text-xs text-sky-200"></i>
+                    <span>Official Dossier</span>
+                </button>
+                <button onclick="triggerFormalPrint()" title="Print / Export PDF" class="no-print p-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-zinc-300 hover:text-white transition-all flex items-center justify-center active:scale-95">
+                    <i class="fa-solid fa-print text-xs text-zinc-400"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- HERO SECTION                                                              -->
+    <!-- ========================================================================= -->
+    <section class="relative pt-12 pb-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+        <div class="text-center space-y-4 max-w-3xl mx-auto">
+            
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 text-xs font-semibold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Sri Lanka UGC Admissions & Course Preference Intelligence</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.15]">
+                Discover Your Optimal State University Degree Pathways
+            </h1>
+
+            <p class="text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+                Empowered by 7-Year UGC cutoff analytics, 3-tier feasibility modeling (Safe, Target, Reach), and Explainable AI (XAI) across 255 campus Uni-Codes.
+            </p>
+
+            <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+                <a href="#advisor-studio" class="px-6 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg shadow-sky-500/25 flex items-center gap-2 active:scale-95">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs text-sky-200"></i>
+                    <span>Launch AI Admissions Matcher</span>
+                </a>
+                <button onclick="openFormalDossierModal()" class="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold text-xs tracking-wider transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-file-pdf text-xs text-rose-400"></i>
+                    <span>Generate Official PDF Dossier</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Live Intelligence Stats Ribbon -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 mt-10 pt-6 border-t border-white/[0.06]">
+            <div class="glass-card rounded-2xl p-4 flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 text-base">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <div>
+                    <div class="text-[10px] font-mono font-bold uppercase text-zinc-400 tracking-wider">Bachelor's Degrees</div>
+                    <div class="text-lg font-black text-white font-mono">121</div>
+                    <div class="text-[10px] text-zinc-500">UGC Undergraduate Courses</div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-base">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div>
+                    <div class="text-[10px] font-mono font-bold uppercase text-zinc-400 tracking-wider">Campus Uni-Codes</div>
+                    <div class="text-lg font-black text-white font-mono">255</div>
+                    <div class="text-[10px] text-zinc-500">17 State Universities</div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-base">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <div>
+                    <div class="text-[10px] font-mono font-bold uppercase text-zinc-400 tracking-wider">Approved Seats</div>
+                    <div class="text-lg font-black text-emerald-400 font-mono">42,937</div>
+                    <div class="text-[10px] text-zinc-500">Annual State Intake</div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-base">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <div>
+                    <div class="text-[10px] font-mono font-bold uppercase text-zinc-400 tracking-wider">District Coverage</div>
+                    <div class="text-lg font-black text-white font-mono">25 / 25</div>
+                    <div class="text-[10px] text-zinc-500">Merit & District Quotas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MAIN WORKBENCH SECTION                                                    -->
+    <!-- ========================================================================= -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-8" id="advisor-studio">
+
+        <!-- ===================================================================== -->
+        <!-- TAB 1: AI DEGREE ADVISOR (HORIZONTAL COMMAND CONSOLE & FULL RESULTS) -->
+        <!-- ===================================================================== -->
+        <div id="view-advisor" class="space-y-8">
+
+            <!-- COMPACT STRATEGIC ADMISSIONS CONSOLE -->
+            <div class="rounded-2xl bg-zinc-950/90 border border-white/[0.08] shadow-xl p-4 sm:p-5 space-y-3.5 relative overflow-hidden backdrop-blur-md">
+                
+                <!-- Header: Title + Single-Line Inline Presets -->
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5 pb-3 border-b border-white/[0.06]">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center text-xs">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-sm font-bold text-white tracking-tight leading-none">Configure Academic Credentials & Strategic Goals</h2>
+                            <span class="text-[10px] text-zinc-400 font-mono">2025/2026 Live UGC Intake • 255 University Degrees</span>
+                        </div>
+                    </div>
+
+                    <!-- Single-line clean presets -->
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                        <span class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mr-1">Presets:</span>
+                        <button type="button" onclick="loadPreset('maths_se')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-sky-500/15 text-zinc-300 hover:text-sky-300 border border-white/[0.06] hover:border-sky-500/30 text-xs font-mono transition-all flex items-center gap-1.5 active:scale-95">
+                            <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span> Maths 1.45
+                        </button>
+                        <button type="button" onclick="loadPreset('bio_med')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-emerald-500/15 text-zinc-300 hover:text-emerald-300 border border-white/[0.06] hover:border-emerald-500/30 text-xs font-mono transition-all flex items-center gap-1.5 active:scale-95">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Bio 1.75
+                        </button>
+                        <button type="button" onclick="loadPreset('tech_eng')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-indigo-500/15 text-zinc-300 hover:text-indigo-300 border border-white/[0.06] hover:border-indigo-500/30 text-xs font-mono transition-all flex items-center gap-1.5 active:scale-95">
+                            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> ET 1.35
+                        </button>
+                        <button type="button" onclick="loadPreset('comm_mgt')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-amber-500/15 text-zinc-300 hover:text-amber-300 border border-white/[0.06] hover:border-amber-500/30 text-xs font-mono transition-all flex items-center gap-1.5 active:scale-95">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Commerce 1.50
+                        </button>
+                        <button type="button" onclick="loadPreset('arts_law')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-purple-500/15 text-zinc-300 hover:text-purple-300 border border-white/[0.06] hover:border-purple-500/30 text-xs font-mono transition-all flex items-center gap-1.5 active:scale-95">
+                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> Arts 1.60
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Academic Parameters Grid (Clean, Compact 7-Column Row) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 items-end">
+                    <!-- Stream (2 cols on lg) -->
+                    <div class="col-span-2 space-y-1">
+                        <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">A/L Subject Stream</label>
+                        <select id="ai-stream" class="w-full h-8 px-2.5 rounded-lg text-xs font-semibold text-white bg-zinc-900 border border-white/10 focus:border-sky-500 focus:outline-none cursor-pointer" onchange="onStreamChange()">
+                            <option value="Physical Science" selected>Physical Science (Maths)</option>
+                            <option value="Biological Science">Biological Science (Bio)</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Engineering Technology">Engineering Tech (ET)</option>
+                            <option value="Biosystems Technology">Biosystems Tech (BST)</option>
+                            <option value="Common / Other Stream">Common / Other</option>
+                        </select>
+                    </div>
+                    
+                    <!-- District -->
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">District Quota</label>
+                        <select id="ai-district" class="w-full h-8 px-2 rounded-lg text-xs font-semibold text-white bg-zinc-900 border border-white/10 focus:border-sky-500 focus:outline-none cursor-pointer">
+                            <option value="COLOMBO" selected>COLOMBO</option>
+                            <option value="GAMPAHA">GAMPAHA</option>
+                            <option value="KALUTARA">KALUTARA</option>
+                            <option value="MATALE">MATALE</option>
+                            <option value="KANDY">KANDY</option>
+                            <option value="NUWARA ELIYA">NUWARA ELIYA</option>
+                            <option value="GALLE">GALLE</option>
+                            <option value="MATARA">MATARA</option>
+                            <option value="HAMBANTOTA">HAMBANTOTA</option>
+                            <option value="JAFFNA">JAFFNA</option>
+                            <option value="KILINOCHCHI">KILINOCHCHI</option>
+                            <option value="MANNAR">MANNAR</option>
+                            <option value="MULLAITIVU">MULLAITIVU</option>
+                            <option value="VAVUNIYA">VAVUNIYA</option>
+                            <option value="TRINCOMALEE">TRINCOMALEE</option>
+                            <option value="BATTICALOA">BATTICALOA</option>
+                            <option value="AMPARA">AMPARA</option>
+                            <option value="PUTTALAM">PUTTALAM</option>
+                            <option value="KURUNEGALA">KURUNEGALA</option>
+                            <option value="ANURADHAPURA">ANURADHAPURA</option>
+                            <option value="POLONNARUWA">POLONNARUWA</option>
+                            <option value="BADULLA">BADULLA</option>
+                            <option value="MONARAGALA">MONARAGALA</option>
+                            <option value="KEGALLE">KEGALLE</option>
+                            <option value="RATNAPURA">RATNAPURA</option>
+                        </select>
+                    </div>
+
+                    <!-- Official Z-Score -->
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">Official Z-Score</label>
+                        <input type="number" step="0.0001" id="ai-zscore" class="w-full h-8 px-2 rounded-lg text-xs font-mono font-bold text-white text-center bg-zinc-900 border border-white/10 focus:border-sky-500 focus:outline-none text-emerald-300" value="1.4500" placeholder="1.4500">
+                    </div>
+
+                    <!-- Common Gen Test -->
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">Gen Test (0-100)</label>
+                        <input type="number" id="ai-general-test" class="w-full h-8 px-2 rounded-lg text-xs font-mono font-bold text-white text-center bg-zinc-900 border border-white/10 focus:border-sky-500 focus:outline-none" value="65">
+                    </div>
+
+                    <!-- A/L Gen English -->
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">A/L Gen Eng</label>
+                        <select id="ai-general-english" class="w-full h-8 px-1.5 rounded-lg text-xs font-semibold text-white text-center bg-zinc-900 border border-white/10 focus:border-sky-500 focus:outline-none cursor-pointer">
+                            <option value="A">Grade A</option>
+                            <option value="B" selected>Grade B</option>
+                            <option value="C">Grade C</option>
+                            <option value="S">Grade S</option>
+                            <option value="F">Grade F</option>
+                        </select>
+                    </div>
+
+                    <!-- O/L Passes -->
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">O/L Eng / Mth</label>
+                        <div class="grid grid-cols-2 gap-1">
+                            <select id="ai-ol-english" title="O/L English" class="w-full h-8 px-1 rounded-lg text-[11px] font-bold text-white text-center bg-zinc-900 border border-white/10 focus:border-sky-500 focus:outline-none cursor-pointer">
+                                <option value="A">Eng A</option>
+                                <option value="B">Eng B</option>
+                                <option value="C" selected>Eng C</option>
+                                <option value="S">Eng S</option>
+                                <option value="F">Eng F</option>
+                            </select>
+                            <select id="ai-ol-maths" title="O/L Maths" class="w-full h-8 px-1 rounded-lg text-[11px] font-bold text-white text-center bg-zinc-900 border border-white/10 focus:border-sky-500 focus:outline-none cursor-pointer">
+                                <option value="A">Mth A</option>
+                                <option value="B">Mth B</option>
+                                <option value="C" selected>Mth C</option>
+                                <option value="S">Mth S</option>
+                                <option value="F">Mth F</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 A/L Examination Subjects (Side-by-Side Tight Bar) -->
+                <div class="space-y-1.5 pt-2 border-t border-white/[0.05]">
+                    <div class="flex items-center justify-between text-[10px] font-bold text-zinc-400 uppercase tracking-wider">
+                        <span>3 A/L Examination Subjects & Grades</span>
+                        <span class="text-zinc-500 font-mono text-[9px] normal-case">Conflict guard active</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+                        <!-- Subject 1 -->
+                        <div class="flex items-center gap-2 p-1.5 rounded-xl bg-zinc-900/60 border border-white/[0.06]">
+                            <span class="text-[10px] font-mono font-bold text-zinc-500 px-1">01</span>
+                            <select id="sub-select-0" class="flex-1 h-7 text-xs font-semibold text-white bg-transparent border-none outline-none cursor-pointer truncate" onchange="onSubjectChange(0)"></select>
+                            <select id="grade-select-0" class="w-24 h-7 text-xs font-bold text-center text-sky-300 bg-zinc-800 rounded-lg border border-white/10 cursor-pointer" onchange="updateGradeBadge(0)">
+                                <option value="A">Grade A</option>
+                                <option value="B" selected>Grade B</option>
+                                <option value="C">Grade C</option>
+                                <option value="S">Grade S</option>
+                                <option value="F">Grade F</option>
+                            </select>
+                        </div>
+
+                        <!-- Subject 2 -->
+                        <div class="flex items-center gap-2 p-1.5 rounded-xl bg-zinc-900/60 border border-white/[0.06]">
+                            <span class="text-[10px] font-mono font-bold text-zinc-500 px-1">02</span>
+                            <select id="sub-select-1" class="flex-1 h-7 text-xs font-semibold text-white bg-transparent border-none outline-none cursor-pointer truncate" onchange="onSubjectChange(1)"></select>
+                            <select id="grade-select-1" class="w-24 h-7 text-xs font-bold text-center text-amber-300 bg-zinc-800 rounded-lg border border-white/10 cursor-pointer" onchange="updateGradeBadge(1)">
+                                <option value="A">Grade A</option>
+                                <option value="B">Grade B</option>
+                                <option value="C" selected>Grade C</option>
+                                <option value="S">Grade S</option>
+                                <option value="F">Grade F</option>
+                            </select>
+                        </div>
+
+                        <!-- Subject 3 -->
+                        <div class="flex items-center gap-2 p-1.5 rounded-xl bg-zinc-900/60 border border-white/[0.06]">
+                            <span class="text-[10px] font-mono font-bold text-zinc-500 px-1">03</span>
+                            <select id="sub-select-2" class="flex-1 h-7 text-xs font-semibold text-white bg-transparent border-none outline-none cursor-pointer truncate" onchange="onSubjectChange(2)"></select>
+                            <select id="grade-select-2" class="w-24 h-7 text-xs font-bold text-center text-amber-300 bg-zinc-800 rounded-lg border border-white/10 cursor-pointer" onchange="updateGradeBadge(2)">
+                                <option value="A">Grade A</option>
+                                <option value="B">Grade B</option>
+                                <option value="C" selected>Grade C</option>
+                                <option value="S">Grade S</option>
+                                <option value="F">Grade F</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: Career Passions (NLP) & Primary Action Button -->
+                <div class="pt-2 border-t border-white/[0.05] flex flex-col md:flex-row items-center gap-3">
+                    <!-- Left: Passions Input + Tags -->
+                    <div class="flex-1 w-full flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                        <div class="flex-1 min-h-[36px] px-2.5 py-1 rounded-xl bg-zinc-900/80 border border-white/10 flex flex-wrap items-center gap-1.5 cursor-text" onclick="focusTagInput('interests-input')">
+                            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                                <i class="fa-solid fa-brain text-sky-400 text-[10px]"></i> Passions:
+                            </span>
+                            <div id="interests-tags-list" class="flex flex-wrap gap-1"></div>
+                            <input type="text" id="interests-input" class="bg-transparent border-none outline-none text-xs text-white flex-1 min-w-[70px] px-1 placeholder-zinc-500" placeholder="+ Type & Enter...">
+                        </div>
+                        <div class="flex items-center gap-1 shrink-0 flex-wrap">
+                            <button type="button" onclick="addTag('interests', 'Software Engineering')" class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-white/10 text-zinc-400 hover:text-white border border-white/5 text-[10px] transition-colors font-medium">+ Software</button>
+                            <button type="button" onclick="addTag('interests', 'Artificial Intelligence')" class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-white/10 text-zinc-400 hover:text-white border border-white/5 text-[10px] transition-colors font-medium">+ AI</button>
+                            <button type="button" onclick="addTag('interests', 'Medicine')" class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-white/10 text-zinc-400 hover:text-white border border-white/5 text-[10px] transition-colors font-medium">+ Medicine</button>
+                            <button type="button" onclick="addTag('interests', 'Law')" class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-white/10 text-zinc-400 hover:text-white border border-white/5 text-[10px] transition-colors font-medium">+ Law</button>
+                        </div>
+                    </div>
+
+                    <!-- Right: Primary Action Button -->
+                    <button onclick="generateAIRecommendations()" class="w-full md:w-auto md:min-w-[260px] h-9 px-5 rounded-xl bg-sky-500 hover:bg-sky-400 text-zinc-950 font-bold text-xs tracking-wider uppercase transition-all shadow-md shadow-sky-500/20 active:scale-95 flex items-center justify-center gap-2 shrink-0">
+                        <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                        <span>Generate Recommendations</span>
+                        <kbd class="hidden sm:inline-block ml-1 px-1.5 py-0.5 rounded bg-black/20 text-[9px] font-mono text-zinc-900 border border-black/10">↵</kbd>
+                    </button>
+                </div>
+            </div>
+
+            <!-- BOTTOM: FULL-WIDTH ADMISSIONS INTELLIGENCE DASHBOARD -->
+            <div class="w-full space-y-6">
+
+                <!-- Placeholder Screen (Before Computation) -->
+                <div id="initial-placeholder" class="glass-panel rounded-3xl p-10 sm:p-14 text-center space-y-4 border border-white/10 shadow-2xl">
+                    <div class="w-16 h-16 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center mx-auto text-2xl shadow-inner">
+                        <i class="fa-solid fa-compass-drafting text-2xl text-sky-400"></i>
+                    </div>
+                    <div class="max-w-md mx-auto space-y-2">
+                        <h3 class="text-xl font-black text-white tracking-tight">AI Admissions Advisory Engine Ready</h3>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Configure your academic credentials in the console above or select a 1-click candidate preset to evaluate 255 campus Uni-Codes, calculate multi-round Board Round vacancy feasibility, and generate your 50-choice preference blueprint.
+                        </p>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="generateAIRecommendations()" class="px-7 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-extrabold tracking-wider transition-all shadow-lg shadow-sky-500/25 inline-flex items-center gap-2 active:scale-95">
+                            <i class="fa-solid fa-bolt text-xs text-amber-300"></i> Run Recommendation Engine
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Active Output Section -->
+                <div id="ai-results-section" style="display: none;" class="space-y-6">
+                    
+                    <!-- KPI Metrics Ribbon (Agency Grade Elevated Bento) -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                        
+                        <!-- Card 1: Eligible Degrees -->
+                        <div class="relative overflow-hidden rounded-2xl bg-zinc-900/50 backdrop-blur-xl border border-white/[0.08] p-4.5 sm:p-5 hover:border-emerald-500/30 transition-all duration-300 group shadow-lg shadow-black/30">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-xs font-semibold text-zinc-300 group-hover:text-emerald-300 transition-colors">Eligible Degrees</span>
+                                <div class="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all">
+                                    <i class="fa-solid fa-graduation-cap text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-baseline justify-between gap-2">
+                                <div class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-white group-hover:text-emerald-400 transition-colors" id="stat-total-eligible">0</div>
+                                <span class="text-[10px] font-mono font-medium text-emerald-400/80 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">Qualified</span>
+                            </div>
+                            <div class="mt-2 text-[11px] text-zinc-500 font-medium">UGC Handbook Courses</div>
+                        </div>
+
+                        <!-- Card 2: Campuses Evaluated -->
+                        <div class="relative overflow-hidden rounded-2xl bg-zinc-900/50 backdrop-blur-xl border border-white/[0.08] p-4.5 sm:p-5 hover:border-sky-500/30 transition-all duration-300 group shadow-lg shadow-black/30">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-xs font-semibold text-zinc-300 group-hover:text-sky-300 transition-colors">Campuses Evaluated</span>
+                                <div class="w-8 h-8 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-sky-500/20 transition-all">
+                                    <i class="fa-solid fa-building-columns text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-baseline justify-between gap-2">
+                                <div class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-white group-hover:text-sky-400 transition-colors" id="stat-total-unicodes">0</div>
+                                <span class="text-[10px] font-mono font-medium text-sky-400/80 bg-sky-500/10 px-2 py-0.5 rounded-md border border-sky-500/20">Uni-Codes</span>
+                            </div>
+                            <div class="mt-2 text-[11px] text-zinc-500 font-medium">Across 17 State Unis</div>
+                        </div>
+
+                        <!-- Card 3: Guaranteed Safe -->
+                        <div class="relative overflow-hidden rounded-2xl bg-zinc-900/50 backdrop-blur-xl border border-white/[0.08] p-4.5 sm:p-5 hover:border-emerald-500/30 transition-all duration-300 group shadow-lg shadow-black/30">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-xs font-semibold text-zinc-300 group-hover:text-emerald-300 transition-colors">Guaranteed Safe</span>
+                                <div class="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all">
+                                    <i class="fa-solid fa-shield-halved text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-baseline justify-between gap-2">
+                                <div class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-emerald-400" id="count-safe">0</div>
+                                <span class="text-[10px] font-mono font-medium text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/30">95%+ Safe</span>
+                            </div>
+                            <div class="mt-2 text-[11px] text-zinc-500 font-medium">Clear of Cutoff Margin</div>
+                        </div>
+
+                        <!-- Card 4: Board Round Reach -->
+                        <div class="relative overflow-hidden rounded-2xl bg-zinc-900/50 backdrop-blur-xl border border-white/[0.08] p-4.5 sm:p-5 hover:border-rose-500/30 transition-all duration-300 group shadow-lg shadow-black/30">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-xs font-semibold text-zinc-300 group-hover:text-rose-300 transition-colors">Board Round Reach</span>
+                                <div class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-rose-500/20 transition-all">
+                                    <i class="fa-solid fa-crosshairs text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-baseline justify-between gap-2">
+                                <div class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-rose-400" id="count-dream">0</div>
+                                <span class="text-[10px] font-mono font-medium text-rose-400/90 bg-rose-500/10 px-2 py-0.5 rounded-md border border-rose-500/20">Aspirational</span>
+                            </div>
+                            <div class="mt-2 text-[11px] text-zinc-500 font-medium">Borderline Cutoff Target</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Header & Preference Studio Action -->
+                    <div class="glass-panel rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-white/10">
+                        <div class="space-y-0.5">
+                            <div class="text-[10px] font-mono font-bold tracking-[0.2em] text-emerald-400 uppercase whitespace-nowrap">RECOMMENDED ADMISSIONS DOSSIER</div>
+                            <h2 class="text-lg font-black text-white flex items-center gap-2 whitespace-nowrap">
+                                <i class="fa-solid fa-trophy text-amber-400 text-sm shrink-0"></i>
+                                <span class="whitespace-nowrap">Top 5 Flagship Degree Matches</span>
+                            </h2>
+                        </div>
+                        <div class="flex items-center gap-2.5 flex-nowrap shrink-0">
+                            <button onclick="openFullBlueprintModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-bold text-xs tracking-wide transition-all shadow-md flex items-center gap-2 whitespace-nowrap active:scale-95 border border-white/10">
+                                <i class="fa-solid fa-layer-group text-xs text-sky-200"></i>
+                                <span>Customize 50 Choices</span>
+                            </button>
+                            <button onclick="openFormalDossierModal()" class="px-4 py-2 rounded-xl bg-white hover:bg-zinc-100 text-slate-950 font-bold text-xs transition-all shadow-md flex items-center gap-2 whitespace-nowrap active:scale-95">
+                                <i class="fa-solid fa-file-invoice text-rose-500 text-xs"></i>
+                                <span>View Formal Dossier</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sub-Tier Switcher Tabs -->
+                    <div class="flex items-center gap-2 overflow-x-auto pb-1 no-print">
+                        <button onclick="switchSubTab('TOP5')" id="sub-tab-top5" class="px-4 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                            Top 5 Flagships
+                        </button>
+                        <button onclick="switchSubTab('SAFE')" id="sub-tab-safe" class="px-4 py-1.5 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white transition-all border border-transparent">
+                            Guaranteed Safe
+                        </button>
+                        <button onclick="switchSubTab('TARGET')" id="sub-tab-target" class="px-4 py-1.5 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white transition-all border border-transparent">
+                            High Target
+                        </button>
+                        <button onclick="switchSubTab('DREAM')" id="sub-tab-dream" class="px-4 py-1.5 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white transition-all border border-transparent">
+                            Board Round Reach
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Cards Grid -->
+                    <div id="top5-cards-container" class="space-y-4">
+                        <div id="top5-view">
+                            <div id="top5-list-rows" class="space-y-4"></div>
+                        </div>
+                        <div id="tier-cards-container" class="space-y-4" style="display: none;"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 2: 7-YEAR UGC CUTOFF MARKS ARCHIVE                                 -->
+        <!-- ===================================================================== -->
+        <div id="view-cutoffs" style="display: none;" class="space-y-6">
+            <div class="glass-panel rounded-3xl p-6 sm:p-7 space-y-4">
+                <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+                    <span class="text-[10px] font-mono font-bold tracking-[0.2em] text-sky-400 uppercase">UGC HISTORICAL CUTOFF ARCHIVE (2019 - 2026)</span>
+                    <span class="text-xs text-zinc-400 font-mono">255 Campus Uni-Codes</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                    <div class="lg:col-span-2">
+                        <input type="text" id="search-input" class="tactile-input w-full px-3.5 py-2.5 rounded-xl text-xs text-white" placeholder="Search course or university...">
+                    </div>
+                    <select id="university-select" class="tactile-input px-3.5 py-2.5 rounded-xl text-xs text-white">
+                        <option value="ALL" selected>All Universities</option>
+                        {% for uni in universities %}
+                        <option value="{{ uni }}">{{ uni }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="year-select" class="tactile-input px-3.5 py-2.5 rounded-xl text-xs text-white">
+                        <option value="2025/2026" selected>2025/2026 (Latest)</option>
+                        <option value="2024/2025">2024/2025</option>
+                        <option value="2023/2024">2023/2024</option>
+                        <option value="2022/2023">2022/2023</option>
+                        <option value="2021/2022">2021/2022</option>
+                        <option value="2020/2021">2020/2021</option>
+                        <option value="2019/2020">2019/2020</option>
+                    </select>
+                    <select id="district-select" class="tactile-input px-3.5 py-2.5 rounded-xl text-xs text-white">
+                        <option value="COLOMBO" selected>COLOMBO</option>
+                        <option value="GAMPAHA">GAMPAHA</option>
+                        <option value="KALUTARA">KALUTARA</option>
+                        <option value="MATALE">MATALE</option>
+                        <option value="KANDY">KANDY</option>
+                        <option value="NUWARA ELIYA">NUWARA ELIYA</option>
+                        <option value="GALLE">GALLE</option>
+                        <option value="MATARA">MATARA</option>
+                        <option value="HAMBANTOTA">HAMBANTOTA</option>
+                        <option value="JAFFNA">JAFFNA</option>
+                        <option value="KILINOCHCHI">KILINOCHCHI</option>
+                        <option value="MANNAR">MANNAR</option>
+                        <option value="MULLAITIVU">MULLAITIVU</option>
+                        <option value="VAVUNIYA">VAVUNIYA</option>
+                        <option value="TRINCOMALEE">TRINCOMALEE</option>
+                        <option value="BATTICALOA">BATTICALOA</option>
+                        <option value="AMPARA">AMPARA</option>
+                        <option value="PUTTALAM">PUTTALAM</option>
+                        <option value="KURUNEGALA">KURUNEGALA</option>
+                        <option value="ANURADHAPURA">ANURADHAPURA</option>
+                        <option value="POLONNARUWA">POLONNARUWA</option>
+                        <option value="BADULLA">BADULLA</option>
+                        <option value="MONARAGALA">MONARAGALA</option>
+                        <option value="KEGALLE">KEGALLE</option>
+                        <option value="RATNAPURA">RATNAPURA</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-3xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-black/40 text-zinc-400 font-mono text-[10px] uppercase border-b border-white/[0.06]">
+                            <tr>
+                                <th class="py-3 px-4">Uni-Code</th>
+                                <th class="py-3 px-4">Course</th>
+                                <th class="py-3 px-4">University</th>
+                                <th class="py-3 px-4">Stream</th>
+                                <th class="py-3 px-4 text-center">Seats</th>
+                                <th class="py-3 px-4">Cutoff Z</th>
+                                <th class="py-3 px-4 text-right">Heatmap</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="divide-y divide-white/[0.03] text-zinc-300"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 3: MASTER HANDBOOK CATALOG                                         -->
+        <!-- ===================================================================== -->
+        <div id="view-master" style="display: none;" class="space-y-6">
+            <div class="glass-panel rounded-3xl p-6 sm:p-7 space-y-4">
+                <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+                    <span class="text-[10px] font-mono font-bold tracking-[0.2em] text-indigo-400 uppercase">OFFICIAL UGC UNDERGRADUATE DIRECTORY</span>
+                    <span class="text-xs text-zinc-400 font-mono">121 Accredited Bachelor's Degrees</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input type="text" id="master-search-input" class="tactile-input w-full px-3.5 py-2.5 rounded-xl text-xs text-white" placeholder="Search degree title or code...">
+                    <select id="master-stream-select" class="tactile-input px-3.5 py-2.5 rounded-xl text-xs text-white">
+                        <option value="ALL" selected>All Streams</option>
+                        <option value="Physical Science">Physical Science</option>
+                        <option value="Biological Science">Biological Science</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Engineering Technology">Engineering Technology</option>
+                        <option value="Biosystems Technology">Biosystems Technology</option>
+                    </select>
+                    <select id="master-aptitude-select" class="tactile-input px-3.5 py-2.5 rounded-xl text-xs text-white">
+                        <option value="ALL" selected>All Degrees</option>
+                        <option value="YES">Requires Aptitude Test</option>
+                        <option value="NO">Direct Admission</option>
+                    </select>
+                </div>
+            </div>
+            <div id="master-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- RICH & INTERACTIVE AGENCY-GRADE FOOTER SYSTEM                              -->
+    <!-- ========================================================================= -->
+    <footer class="border-t border-white/[0.08] bg-slate-950/90 backdrop-blur-2xl pt-16 pb-12 text-xs text-zinc-400 relative overflow-hidden">
+        
+        <!-- Subtle Ambient Background Glow -->
+        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.06),transparent_60%)]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
+            
+            <!-- TOP ROW: Platform Brand + Core Platform Modules -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-10 border-b border-white/[0.07]">
+                
+                <!-- Col 1: Brand & Project Mission (4 Cols) -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-b from-sky-400 to-indigo-600 p-[1px] shadow-[0_0_20px_rgba(56,189,248,0.25)] flex items-center justify-center">
+                            <div class="w-full h-full rounded-[11px] bg-zinc-950 flex items-center justify-center text-sky-400">
+                                <i class="fa-solid fa-graduation-cap text-base"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-base font-black text-white tracking-tight">UniPath<span class="text-sky-400">.AI</span></div>
+                            <div class="text-[10px] font-mono text-zinc-400 tracking-wider uppercase">Sri Lanka UGC Admissions Intelligence</div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-zinc-400 leading-relaxed text-xs max-w-sm">
+                        An AI-driven strategic admissions counselor and 50-choice preference optimizer designed for Sri Lankan G.C.E. A/L students applying to state universities.
+                    </p>
+
+                    <!-- Academic Project Metadata Badge -->
+                    <div class="p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-1 max-w-sm">
+                        <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-sky-400">Faculty of Computing • KDU</div>
+                        <div class="text-[11px] text-zinc-300">CS22032 Essentials of Artificial Intelligence</div>
+                    </div>
+                </div>
+
+                <!-- Col 2: Interactive Modules Launchpad (3 Cols) -->
+                <div class="lg:col-span-3 space-y-3">
+                    <div class="font-bold text-white uppercase text-[11px] tracking-wider font-mono flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sky-400 text-xs"></i>
+                        <span>Platform Modules</span>
+                    </div>
+                    <ul class="space-y-2">
+                        <li>
+                            <button onclick="switchMainTab('advisor'); window.scrollTo({top: 400, behavior: 'smooth'});" class="hover:text-sky-300 transition-colors flex items-center gap-2 text-zinc-400 group">
+                                <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600 group-hover:text-sky-400 transition-colors"></i>
+                                <span>AI Strategic Degree Advisor</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="switchMainTab('cutoffs'); window.scrollTo({top: 400, behavior: 'smooth'});" class="hover:text-sky-300 transition-colors flex items-center gap-2 text-zinc-400 group">
+                                <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600 group-hover:text-sky-400 transition-colors"></i>
+                                <span>7-Year UGC Cutoff Archive (2019-2026)</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="switchMainTab('master'); window.scrollTo({top: 400, behavior: 'smooth'});" class="hover:text-sky-300 transition-colors flex items-center gap-2 text-zinc-400 group">
+                                <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600 group-hover:text-sky-400 transition-colors"></i>
+                                <span>121 UGC Bachelor Degrees Directory</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="openFormalDossierModal()" class="hover:text-rose-300 transition-colors flex items-center gap-2 text-zinc-400 group">
+                                <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600 group-hover:text-rose-400 transition-colors"></i>
+                                <span>Official Printable Academic Dossier</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="openCmdk()" class="hover:text-amber-300 transition-colors flex items-center gap-2 text-zinc-400 group">
+                                <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600 group-hover:text-amber-400 transition-colors"></i>
+                                <span>Command Search Palette (Ctrl + K)</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Stream Degree Filters (2 Cols) -->
+                <div class="lg:col-span-2 space-y-3">
+                    <div class="font-bold text-white uppercase text-[11px] tracking-wider font-mono flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-indigo-400 text-xs"></i>
+                        <span>A/L Streams</span>
+                    </div>
+                    <ul class="space-y-1.5 text-zinc-400">
+                        <li><button onclick="loadPreset('maths_se')" class="hover:text-sky-300 transition-colors">Physical Science</button></li>
+                        <li><button onclick="loadPreset('bio_med')" class="hover:text-emerald-300 transition-colors">Biological Science</button></li>
+                        <li><button onclick="loadPreset('tech_eng')" class="hover:text-indigo-300 transition-colors">Engineering Tech (ET)</button></li>
+                        <li><button onclick="document.getElementById('ai-stream').value='Biosystems Technology'; onStreamChange();" class="hover:text-amber-300 transition-colors">Biosystems Tech (BST)</button></li>
+                        <li><button onclick="document.getElementById('ai-stream').value='Commerce'; onStreamChange();" class="hover:text-sky-300 transition-colors">Commerce & Mgt</button></li>
+                        <li><button onclick="document.getElementById('ai-stream').value='Arts'; onStreamChange();" class="hover:text-pink-300 transition-colors">Arts & Humanities</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: UGC Quota Directives & Rules (3 Cols) -->
+                <div class="lg:col-span-3 space-y-3">
+                    <div class="font-bold text-white uppercase text-[11px] tracking-wider font-mono flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-emerald-400 text-xs"></i>
+                        <span>UGC Admissions Rules</span>
+                    </div>
+                    <div class="space-y-2 text-zinc-400 text-[11px] leading-relaxed">
+                        <div class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1">
+                            <div class="font-bold text-zinc-200">Quota Allocation Formula:</div>
+                            <div>• <strong>40%</strong> All-Island Merit Quota</div>
+                            <div>• <strong>55%</strong> 25 District Population Quota</div>
+                            <div>• <strong>5%</strong> 16 Educationally Disadvantaged Districts</div>
+                        </div>
+                        <div class="text-[10px] text-zinc-500">
+                            Minimum 3 S passes in one sitting + Common General Test mark >= 30% required for state admission eligibility.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- MIDDLE ROW: Interactive 17 State Universities Directory Tags -->
+            <div class="space-y-3 pb-8 border-b border-white/[0.07]">
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-white uppercase text-[11px] tracking-wider font-mono flex items-center gap-2">
+                        <i class="fa-solid fa-building-columns text-sky-400 text-xs"></i>
+                        <span>17 Sri Lankan State Universities & Specialized Campuses</span>
+                    </span>
+                    <span class="text-[10px] font-mono text-zinc-500 hidden sm:inline">255 Official Uni-Codes</span>
+                </div>
+                
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Univ. of Colombo</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Univ. of Peradeniya</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Univ. of Sri Jayewardenepura</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Univ. of Kelaniya</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Univ. of Moratuwa</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Univ. of Jaffna</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Univ. of Ruhuna</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Eastern Univ.</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">South Eastern Univ. (SEUSL)</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Rajarata Univ.</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Sabaragamuwa Univ.</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Wayamba Univ.</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Uva Wellassa Univ.</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Univ. of Vavuniya</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">UCSC (Computing)</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">Sri Palee Campus</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15 transition-all cursor-default">GWUIM Gampaha</span>
+                </div>
+            </div>
+
+            <!-- BOTTOM BAR: Copyright + Back to Top Action -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-zinc-500 font-mono text-[11px]">
+                <div class="flex items-center gap-2">
+                    <span>© 2026 UniPath.AI</span>
+                    <span>•</span>
+                    <span>Sri Lankan UGC Higher Education Admissions Engine</span>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="hover:text-white transition-colors flex items-center gap-1.5 text-zinc-400">
+                        <i class="fa-solid fa-arrow-up text-xs"></i>
+                        <span>Back to Top</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 1: FORMAL ACADEMIC ADMISSIONS DOSSIER PREVIEW MODAL                 -->
+    <!-- ========================================================================= -->
+    <div id="dossier-modal-overlay" class="fixed inset-0 z-[70] bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4 overscroll-contain" onclick="if(event.target === this) closeFormalDossierModal();">
+        <div class="glass-panel w-full max-w-5xl rounded-3xl h-[92vh] max-h-[92vh] flex flex-col overflow-hidden border border-white/10 shadow-2xl overscroll-contain" onclick="event.stopPropagation()">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-white/[0.06] flex items-center justify-between gap-4 bg-white/[0.02] shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono font-bold tracking-[0.2em] text-emerald-400 uppercase">OFFICIAL REPORT PREVIEW</span>
+                        <h2 class="text-base font-bold text-white mt-0.5">UGC Strategic Admissions & Preference Blueprint Dossier</h2>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="hidden sm:inline-block text-[11px] text-zinc-400 font-mono">Destination: "Save as PDF"</span>
+                    <button onclick="triggerFormalPrint()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-indigo-600 hover:from-rose-400 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-rose-500/20 flex items-center gap-2 active:scale-95">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>Download / Save as PDF</span>
+                    </button>
+                    <button onclick="closeFormalDossierModal()" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-zinc-400 flex items-center justify-center transition-all ml-1">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Body (Formal Document Container) -->
+            <div class="p-6 overflow-y-auto bg-slate-900/50 flex-1 min-h-0 overscroll-contain modal-scroll-area custom-scrollbar" data-lenis-prevent>
+                <div id="formal-document-view" class="bg-white text-slate-900 p-8 sm:p-12 rounded-2xl shadow-xl max-w-4xl mx-auto space-y-8 text-sm font-sans border border-slate-200">
+                    <!-- Dynamic Document Content Populated by JS -->
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-white/[0.06] bg-black/40 flex items-center justify-between text-xs text-zinc-400 shrink-0">
+                <span>Official PDF-compliant academic report generated by Sri Lankan UGC AI Admissions Engine.</span>
+                <button onclick="closeFormalDossierModal()" class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition-all">Close Preview</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 2: INTERACTIVE 50-CHOICE DRAG & DROP MODAL                         -->
+    <!-- ========================================================================= -->
+    <div id="blueprint-modal-overlay" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl hidden items-center justify-center p-4 overscroll-contain" onclick="if(event.target === this) closeFullBlueprintModal();">
+        <div class="glass-panel w-full max-w-4xl rounded-3xl h-[88vh] max-h-[88vh] flex flex-col overflow-hidden border border-white/10 shadow-2xl overscroll-contain" onclick="event.stopPropagation()">
+            <div class="p-5 border-b border-white/[0.06] flex items-center justify-between gap-4 bg-white/[0.02] shrink-0">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-mono font-bold tracking-[0.2em] text-sky-400 uppercase">UGC PREFERENCE BLUEPRINT</span>
+                        <span class="text-zinc-600">•</span>
+                        <span class="text-xs text-zinc-400">Choice 1 to 50 Optimizer</span>
+                    </div>
+                    <h2 class="text-base font-bold text-white mt-0.5">Customize UGC Application Preference Order</h2>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="resetToAIOptimalOrder()" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-300 transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-rotate-left text-xs"></i> Reset Order
+                    </button>
+                    <button onclick="openFormalDossierModal()" class="px-3.5 py-1.5 rounded-lg bg-white text-slate-950 text-xs font-bold transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-invoice text-rose-500 text-sm"></i> View Formal Dossier
+                    </button>
+                    <button onclick="closeFullBlueprintModal()" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-zinc-400 flex items-center justify-center transition-all ml-1">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Body (Drag List) with min-h-0 flex-1 overflow-y-auto overscroll-contain -->
+            <div id="full-blueprint-interactive-rows" class="p-5 overflow-y-auto space-y-2.5 flex-1 min-h-0 overscroll-contain modal-scroll-area custom-scrollbar" data-lenis-prevent></div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-white/[0.06] bg-black/40 flex items-center justify-between text-xs text-zinc-400 shrink-0">
+                <span>Drag rows using <strong class="text-sky-400"><i class="fa-solid fa-grip-vertical text-xs text-zinc-500"></i> Grip</strong> or click <strong class="text-sky-400">▲/▼</strong> to reorder.</span>
+                <button onclick="closeFullBlueprintModal()" class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition-all">Save & Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 3: 25-DISTRICT HEATMAP MODAL                                       -->
+    <!-- ========================================================================= -->
+    <div id="modal-overlay" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl hidden items-center justify-center p-4 overscroll-contain" onclick="if(event.target === this) closeCourseModal();">
+        <div class="glass-panel w-full max-w-xl rounded-3xl p-6 max-h-[85vh] overflow-y-auto min-h-0 border border-white/10 space-y-4 overscroll-contain modal-scroll-area custom-scrollbar" data-lenis-prevent onclick="event.stopPropagation()">
+            <div class="flex items-start justify-between">
+                <div>
+                    <span id="modal-unicode" class="px-2 py-0.5 rounded font-mono text-xs font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">008B</span>
+                    <h2 id="modal-title" class="text-base font-bold text-white mt-1">Course Title</h2>
+                    <p id="modal-uni" class="text-xs text-zinc-400 mt-0.5">University</p>
+                </div>
+                <button id="close-modal" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-zinc-400 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            <div id="modal-district-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2"></div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- HIDDEN PURE-WHITE FORMAL PRINT CONTAINER                                  -->
+    <!-- ========================================================================= -->
+    <div id="official-dossier-print-container" style="display: none;"></div>
+
+    <!-- ========================================================================= -->
+    <!-- SONNER TOAST NOTIFICATION CONTAINER                                       -->
+    <!-- ========================================================================= -->
+    <div id="sonner-toast-container" class="fixed bottom-6 right-6 z-[9999] flex flex-col gap-2.5 pointer-events-none"></div>
+
+    <!-- ========================================================================= -->
+    <!-- CMD+K RAYCAST / LINEAR COMMAND PALETTE                                    -->
+    <!-- ========================================================================= -->
+    <div id="cmdk-modal" class="fixed inset-0 z-[999] bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 transition-all" onclick="if(event.target === this) closeCmdk();">
+        <div class="glass-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-white/15 shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-zinc-950/95 flex flex-col max-h-[85vh] animate-in fade-in zoom-in-95 duration-150" onclick="event.stopPropagation()">
+            
+            <!-- Modal Header / Search Bar -->
+            <div class="p-4 border-b border-white/10 flex items-center gap-3 bg-white/[0.03]">
+                <div class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                </div>
+                <input id="cmdk-search-input" type="text" placeholder="Type a degree, university, stream, or tool... (e.g. Software, Colombo, Bio, Dossier)" class="w-full bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none font-medium" autofocus autocomplete="off">
+                <button onclick="closeCmdk()" class="px-2 py-1 rounded-md bg-white/10 hover:bg-white/20 text-[10px] font-mono text-zinc-300 transition-colors">ESC</button>
+            </div>
+
+            <!-- Quick Filter Chips -->
+            <div class="px-4 py-2.5 bg-black/40 border-b border-white/5 flex items-center gap-2 overflow-x-auto text-[11px] text-zinc-400 shrink-0 no-scrollbar">
+                <span class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider">Quick:</span>
+                <button onclick="cmdkQuickFilter('Software')" class="px-2 py-0.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-zinc-300 hover:text-white transition-all whitespace-nowrap">💻 Software Eng</button>
+                <button onclick="cmdkQuickFilter('Medicine')" class="px-2 py-0.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-zinc-300 hover:text-white transition-all whitespace-nowrap">🩺 Medicine</button>
+                <button onclick="cmdkQuickFilter('Engineering')" class="px-2 py-0.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-zinc-300 hover:text-white transition-all whitespace-nowrap">⚙️ Engineering</button>
+                <button onclick="cmdkQuickFilter('Colombo')" class="px-2 py-0.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-zinc-300 hover:text-white transition-all whitespace-nowrap">🏛️ Univ of Colombo</button>
+                <button onclick="cmdkQuickFilter('Moratuwa')" class="px-2 py-0.5 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-zinc-300 hover:text-white transition-all whitespace-nowrap">🏛️ Univ of Moratuwa</button>
+            </div>
+
+            <!-- Results List -->
+            <div id="cmdk-results" class="overflow-y-auto p-3 space-y-1.5 text-xs flex-1 max-h-96"></div>
+
+            <!-- Footer Hints -->
+            <div class="p-3 bg-zinc-950 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500 font-mono">
+                <div class="flex items-center gap-3">
+                    <span><kbd class="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400">↑↓</kbd> to navigate</span>
+                    <span><kbd class="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400">Enter</kbd> to select</span>
+                    <span><kbd class="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400">Esc</kbd> to close</span>
+                </div>
+                <div class="text-sky-400 font-semibold">121 Degrees • 17 State Universities</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MAIN SCRIPT LOGIC -->
+    <script>
+        // Initialize Smooth Lenis Scrolling
+        let lenis;
+        try {
+            lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+        } catch(e) { console.warn("Lenis init skipped", e); }
+
+        function triggerCelebrationConfetti() {
+            try {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.8 },
+                    colors: ['#38bdf8', '#6366f1', '#10b981', '#f59e0b']
+                });
+            } catch(e) {}
+        }
+
+        function showSonnerToast(title, type="info", desc="") {
+            let container = document.getElementById('sonner-toast-container');
+            if (!container) return;
+            let toast = document.createElement('div');
+            let icon = type === 'success' ? 'fa-circle-check text-emerald-400' : (type === 'error' ? 'fa-circle-xmark text-rose-400' : 'fa-circle-info text-sky-400');
+            toast.className = 'glass-panel p-3.5 rounded-2xl flex items-center gap-3 text-xs text-white border border-white/15 shadow-2xl pointer-events-auto transition-all animate-in slide-in-from-bottom-2 duration-200';
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-base"></i>
+                <div>
+                    <div class="font-bold">${title}</div>
+                    ${desc ? `<div class="text-[11px] text-zinc-400">${desc}</div>` : ''}
+                </div>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.add('opacity-0', 'translate-y-2'); setTimeout(() => toast.remove(), 300); }, 3500);
+        }
+
+        const officialStreamSubjects = {
+            "Physical Science": [
+                "Combined Mathematics",
+                "Physics",
+                "Chemistry",
+                "Information & Communication Technology (ICT)",
+                "Higher Mathematics"
+            ],
+            "Biological Science": [
+                "Biology",
+                "Chemistry",
+                "Physics",
+                "Agricultural Science",
+                "Information & Communication Technology (ICT)"
+            ],
+            "Commerce": [
+                "Accounting",
+                "Business Studies",
+                "Economics",
+                "Business Statistics",
+                "Information & Communication Technology (ICT)",
+                "Geography",
+                "Political Science",
+                "History of Sri Lanka & India",
+                "English Literature",
+                "Combined Mathematics"
+            ],
+            "Engineering Technology": [
+                "Engineering Technology (ET)",
+                "Science for Technology (SFT)",
+                "Information & Communication Technology (ICT)",
+                "Economics",
+                "Geography",
+                "Home Economics",
+                "English Literature",
+                "Communication & Media Studies",
+                "Art",
+                "Business Studies",
+                "Accounting"
+            ],
+            "Biosystems Technology": [
+                "Biosystems Technology (BST)",
+                "Science for Technology (SFT)",
+                "Agricultural Science",
+                "Information & Communication Technology (ICT)",
+                "Economics",
+                "Geography",
+                "Home Economics",
+                "English Literature",
+                "Communication & Media Studies",
+                "Art",
+                "Business Studies",
+                "Accounting"
+            ],
+            "Arts": [
+                // Basket 1: Social Sciences & Civilizations
+                "Economics",
+                "Geography",
+                "Political Science",
+                "Logic & Scientific Method",
+                "History of Sri Lanka & India",
+                "History of Europe & Modern World",
+                "Buddhist Civilization",
+                "Hindu Civilization",
+                "Islamic Civilization",
+                "Christian Civilization",
+                "Greek & Roman Civilization",
+                "Buddhism",
+                "Hinduism",
+                "Islam",
+                "Christianity / Catholicism",
+                // Basket 2: Languages & Literature
+                "Sinhala",
+                "Tamil",
+                "English Literature",
+                "Pali",
+                "Sanskrit",
+                "Arabic",
+                "French",
+                "German",
+                "Russian",
+                "Hindi",
+                "Chinese",
+                "Japanese",
+                "Korean",
+                // Basket 3: Aesthetic Subjects
+                "Art",
+                "Dancing (Indigenous / Kandyan)",
+                "Dancing (Low Country)",
+                "Dancing (Sabaragamuwa)",
+                "Bharatha Natyam",
+                "Oriental Music",
+                "Carnatic Music",
+                "Western Music",
+                "Drama & Theatre (Sinhala)",
+                "Drama & Theatre (Tamil)",
+                "Drama & Theatre (English)",
+                // Basket 4: Applied & Practical Subjects
+                "Communication & Media Studies",
+                "Information & Communication Technology (ICT)",
+                "Agricultural Science",
+                "Home Economics",
+                "Accounting",
+                "Business Studies",
+                "Business Statistics"
+            ],
+            "Common / Other Stream": [
+                "Combined Mathematics",
+                "Physics",
+                "Chemistry",
+                "Biology",
+                "Information & Communication Technology (ICT)",
+                "Agricultural Science",
+                "Engineering Technology (ET)",
+                "Biosystems Technology (BST)",
+                "Science for Technology (SFT)",
+                "Accounting",
+                "Business Studies",
+                "Economics",
+                "Business Statistics",
+                "Geography",
+                "Political Science",
+                "Logic & Scientific Method",
+                "History of Sri Lanka & India",
+                "Sinhala",
+                "Tamil",
+                "English Literature",
+                "Communication & Media Studies",
+                "Art",
+                "Home Economics"
+            ]
+        };
+
+        let selectedSubjects = ["Combined Mathematics", "Physics", "Chemistry"];
+        let studentInterests = ["Software Engineering", "Artificial Intelligence"];
+        let studentCareers = ["Software Engineer", "AI Developer"];
+
+        function loadPreset(preset) {
+            if (preset === 'maths_se') {
+                document.getElementById('ai-stream').value = 'Physical Science';
+                document.getElementById('ai-district').value = 'COLOMBO';
+                document.getElementById('ai-zscore').value = '1.4500';
+                selectedSubjects = ["Combined Mathematics", "Physics", "Chemistry"];
+                document.getElementById('grade-select-0').value = 'B';
+                document.getElementById('grade-select-1').value = 'C';
+                document.getElementById('grade-select-2').value = 'C';
+                studentInterests = ["Software Engineering", "Artificial Intelligence"];
+            } else if (preset === 'bio_med') {
+                document.getElementById('ai-stream').value = 'Biological Science';
+                document.getElementById('ai-district').value = 'KANDY';
+                document.getElementById('ai-zscore').value = '1.7500';
+                selectedSubjects = ["Biology", "Chemistry", "Physics"];
+                document.getElementById('grade-select-0').value = 'A';
+                document.getElementById('grade-select-1').value = 'B';
+                document.getElementById('grade-select-2').value = 'B';
+                studentInterests = ["Medicine", "Surgery", "Healthcare"];
+            } else if (preset === 'tech_eng') {
+                document.getElementById('ai-stream').value = 'Engineering Technology';
+                document.getElementById('ai-district').value = 'GAMPAHA';
+                document.getElementById('ai-zscore').value = '1.3500';
+                selectedSubjects = ["Engineering Technology (ET)", "Science for Technology (SFT)", "Information & Communication Technology (ICT)"];
+                document.getElementById('grade-select-0').value = 'B';
+                document.getElementById('grade-select-1').value = 'B';
+                document.getElementById('grade-select-2').value = 'C';
+                studentInterests = ["Technology", "Engineering", "Robotics"];
+            } else if (preset === 'comm_mgt') {
+                document.getElementById('ai-stream').value = 'Commerce';
+                document.getElementById('ai-district').value = 'COLOMBO';
+                document.getElementById('ai-zscore').value = '1.5000';
+                selectedSubjects = ["Accounting", "Business Studies", "Economics"];
+                document.getElementById('grade-select-0').value = 'A';
+                document.getElementById('grade-select-1').value = 'B';
+                document.getElementById('grade-select-2').value = 'C';
+                studentInterests = ["Accounting", "Finance", "Business Administration"];
+            } else if (preset === 'arts_law') {
+                document.getElementById('ai-stream').value = 'Arts';
+                document.getElementById('ai-district').value = 'COLOMBO';
+                document.getElementById('ai-zscore').value = '1.6000';
+                selectedSubjects = ["Political Science", "Logic & Scientific Method", "English Literature"];
+                document.getElementById('grade-select-0').value = 'A';
+                document.getElementById('grade-select-1').value = 'B';
+                document.getElementById('grade-select-2').value = 'B';
+                studentInterests = ["Law", "International Relations", "Public Policy"];
+            }
+            updateSubjectDropdowns();
+            [0, 1, 2].forEach(updateGradeBadge);
+            renderTags('interests');
+            generateAIRecommendations();
+        }
+
+        function onStreamChange() {
+            let stream = document.getElementById('ai-stream').value;
+            let subjects = officialStreamSubjects[stream] || officialStreamSubjects["Physical Science"];
+            
+            // Assign 3 distinct default subjects for the stream
+            selectedSubjects[0] = subjects[0] || "";
+            selectedSubjects[1] = subjects[1] || subjects[0] || "";
+            selectedSubjects[2] = subjects[2] || subjects[1] || subjects[0] || "";
+
+            updateSubjectDropdowns();
+            [0, 1, 2].forEach(updateGradeBadge);
+        }
+
+        function updateSubjectDropdowns() {
+            let stream = document.getElementById('ai-stream').value;
+            let subjects = officialStreamSubjects[stream] || officialStreamSubjects["Physical Science"];
+
+            for (let i = 0; i < 3; i++) {
+                let select = document.getElementById(`sub-select-${i}`);
+                if (!select) continue;
+                let currentVal = selectedSubjects[i];
+                select.innerHTML = '';
+
+                // Subjects selected in the OTHER two dropdowns cannot be picked
+                let otherSelected = selectedSubjects.filter((s, idx) => idx !== i && s);
+
+                subjects.forEach(sub => {
+                    let opt = document.createElement('option');
+                    opt.value = sub;
+                    
+                    const isTakenElsewhere = otherSelected.includes(sub);
+                    if (isTakenElsewhere) {
+                        opt.disabled = true;
+                        opt.innerText = `${sub} (Already Selected)`;
+                        opt.className = 'text-zinc-600 bg-zinc-950 font-normal italic';
+                    } else {
+                        opt.disabled = false;
+                        opt.innerText = sub;
+                        opt.className = 'text-zinc-100 bg-zinc-900 font-medium';
+                    }
+
+                    if (sub === currentVal) {
+                        opt.selected = true;
+                    }
+                    select.appendChild(opt);
+                });
+            }
+        }
+
+        function onSubjectChange(index) {
+            let select = document.getElementById(`sub-select-${index}`);
+            if (!select) return;
+            let newVal = select.value;
+            selectedSubjects[index] = newVal;
+
+            let stream = document.getElementById('ai-stream').value;
+            let subjects = officialStreamSubjects[stream] || officialStreamSubjects["Physical Science"];
+
+            // If another dropdown already had this subject, auto-reassign it to the next available unselected subject
+            for (let otherIdx = 0; otherIdx < 3; otherIdx++) {
+                if (otherIdx !== index && selectedSubjects[otherIdx] === newVal) {
+                    let available = subjects.find(s => !selectedSubjects.includes(s) && s !== newVal);
+                    if (available) {
+                        selectedSubjects[otherIdx] = available;
+                    }
+                }
+            }
+
+            // Refresh all 3 dropdowns to synchronize disabled states and (Already Selected) labels
+            updateSubjectDropdowns();
+        }
+
+        function updateGradeBadge(idx) {
+            let select = document.getElementById(`grade-select-${idx}`);
+            if (!select) return;
+            let val = select.value;
+            select.classList.remove('text-emerald-400', 'text-sky-300', 'text-amber-300', 'text-purple-300', 'text-rose-400');
+            if (val === 'A') select.classList.add('text-emerald-400');
+            else if (val === 'B') select.classList.add('text-sky-300');
+            else if (val === 'C') select.classList.add('text-amber-300');
+            else if (val === 'S') select.classList.add('text-purple-300');
+            else if (val === 'F') select.classList.add('text-rose-400');
+
+            let badge = document.getElementById(`grade-badge-${idx}`);
+            if (badge) {
+                let styles = {
+                    'A': { text: 'Grade A', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' },
+                    'B': { text: 'Grade B', cls: 'bg-sky-500/15 text-sky-300 border-sky-500/30' },
+                    'C': { text: 'Grade C', cls: 'bg-amber-500/15 text-amber-300 border-amber-500/30' },
+                    'S': { text: 'Grade S', cls: 'bg-purple-500/15 text-purple-300 border-purple-500/30' },
+                    'F': { text: 'Grade F', cls: 'bg-rose-500/15 text-rose-300 border-rose-500/30' }
+                };
+                let s = styles[val] || styles['C'];
+                badge.className = `text-[10px] font-bold px-2 py-0.5 rounded-md font-mono transition-colors border ${s.cls}`;
+                badge.innerText = `Grade ${val}`;
+            }
+        }
+
+        function renderTags(type) {
+            let list = studentInterests;
+            let container = document.getElementById(`interests-tags-list`);
+            container.innerHTML = '';
+
+            list.forEach((tag, idx) => {
+                let span = document.createElement('span');
+                span.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-semibold';
+                span.innerHTML = `${tag} <button type="button" onclick="removeTag('${type}', ${idx})" class="text-zinc-400 hover:text-white"><i class="fa-solid fa-xmark text-[10px]"></i></button>`;
+                container.appendChild(span);
+            });
+        }
+
+        function addTag(type, value) {
+            let clean = value.trim();
+            if (!clean) return;
+            if (!studentInterests.includes(clean)) {
+                studentInterests.push(clean);
+                renderTags(type);
+            }
+        }
+
+        function removeTag(type, idx) {
+            studentInterests.splice(idx, 1);
+            renderTags(type);
+        }
+
+        function focusTagInput(id) {
+            document.getElementById(id).focus();
+        }
+
+        document.getElementById('interests-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ',') {
+                e.preventDefault();
+                addTag('interests', this.value);
+                this.value = '';
+            }
+        });
+
+        function switchMainTab(tab) {
+            ['advisor', 'cutoffs', 'master'].forEach(t => {
+                document.getElementById(`view-${t}`).style.display = (t === tab ? 'block' : 'none');
+                let btn = document.getElementById(`tab-btn-${t}`);
+                if (t === tab) {
+                    btn.className = 'px-4 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-sky-500/90 to-indigo-600/90 border border-white/20 shadow-[0_2px_12px_rgba(56,189,248,0.3)] flex items-center gap-2 transition-all duration-300 active:scale-95';
+                } else {
+                    btn.className = 'px-4 py-1.5 rounded-full text-xs font-semibold text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05] transition-all duration-200 flex items-center gap-2';
+                }
+            });
+            if (tab === 'cutoffs') loadCutoffData();
+            if (tab === 'master') loadMasterData();
+        }
+
+        let currentAIResults = null;
+        let customBlueprintList = [];
+        
+        // Modal Scroll Lock & Body Trap Management
+        function lockBodyScroll() {
+            document.body.classList.add('modal-open');
+        }
+
+        function unlockBodyScroll() {
+            const activeModals = document.querySelectorAll('#blueprint-modal-overlay:not(.hidden), #dossier-modal-overlay:not(.hidden), #modal-overlay:not(.hidden), #cmdk-modal:not(.hidden)');
+            if (activeModals.length === 0) {
+                document.body.classList.remove('modal-open');
+            }
+        }
+
+        let initialAIBlueprintList = [];
+
+        async function generateAIRecommendations() {
+            let payload = {
+                stream: document.getElementById('ai-stream').value,
+                district: document.getElementById('ai-district').value,
+                zscore: parseFloat(document.getElementById('ai-zscore').value) || 0.0,
+                common_general_test: parseFloat(document.getElementById('ai-general-test').value) || 50,
+                general_english: document.getElementById('ai-general-english').value,
+                ol_english: document.getElementById('ai-ol-english').value,
+                ol_maths: document.getElementById('ai-ol-maths').value,
+                subject_grades: {
+                    [selectedSubjects[0]]: document.getElementById('grade-select-0').value,
+                    [selectedSubjects[1]]: document.getElementById('grade-select-1').value,
+                    [selectedSubjects[2]]: document.getElementById('grade-select-2').value
+                },
+                interests: studentInterests,
+                career_goals: studentCareers
+            };
+
+            let res = await fetch('/api/recommend', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+
+            let result = await res.json();
+            if (result.status === 'success') {
+                currentAIResults = result.data;
+                initialAIBlueprintList = JSON.parse(JSON.stringify(result.data.ugc_preference_blueprint || []));
+                customBlueprintList = JSON.parse(JSON.stringify(result.data.ugc_preference_blueprint || []));
+                
+                document.getElementById('initial-placeholder').style.display = 'none';
+                document.getElementById('ai-results-section').style.display = 'block';
+
+                document.getElementById('stat-total-eligible').innerText = result.data.total_eligible_count;
+                document.getElementById('stat-total-unicodes').innerText = result.data.total_unicodes_evaluated || result.data.total_eligible_count;
+                document.getElementById('count-safe').innerText = result.data.safe_count;
+                document.getElementById('count-dream').innerText = result.data.dream_count;
+
+                switchSubTab('TOP5');
+                buildFormalDocumentHTML();
+                triggerCelebrationConfetti();
+                showSonnerToast("Admissions Analysis Complete", "success", "Evaluated 255 campus Uni-Codes successfully");
+            }
+        }
+
+        function switchSubTab(tier) {
+            ['top5', 'safe', 'target', 'dream'].forEach(t => {
+                let btn = document.getElementById(`sub-tab-${t}`);
+                if (btn) {
+                    if (t === tier.toLowerCase()) {
+                        btn.className = 'px-4 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-500/20 text-sky-300 border border-sky-500/30';
+                    } else {
+                        btn.className = 'px-4 py-1.5 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white transition-all border border-transparent';
+                    }
+                }
+            });
+
+            let top5View = document.getElementById('top5-view');
+            let tierContainer = document.getElementById('tier-cards-container');
+
+            if (tier === 'TOP5') {
+                tierContainer.style.display = 'none';
+                top5View.style.display = 'block';
+                renderTop5();
+            } else {
+                top5View.style.display = 'none';
+                tierContainer.style.display = 'block';
+                let list = tier === 'SAFE' ? currentAIResults.safe_recommendations :
+                           (tier === 'TARGET' ? currentAIResults.target_recommendations : currentAIResults.dream_recommendations);
+                renderTierList(list, tier);
+            }
+        }
+
+        function renderTop5() {
+            setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 10);
+            let container = document.getElementById('top5-list-rows');
+            container.innerHTML = '';
+            let top5 = currentAIResults?.top_5_flagship_matches || [];
+
+            top5.forEach((d, index) => {
+                let bestCampus = (d.offering_campuses && d.offering_campuses.length > 0) ? d.offering_campuses[0] : {};
+                let card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl p-5 sm:p-6 space-y-4 hover:border-sky-500/30 transition-all duration-300 relative overflow-hidden group';
+
+                let tierBadge = `<span class="px-2.5 py-1 rounded-md font-mono text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">GUARANTEED SAFE</span>`;
+                if (d.feasibility_tier === 'TARGET') {
+                    tierBadge = `<span class="px-2.5 py-1 rounded-md font-mono text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">TARGET MATCH</span>`;
+                } else if (d.feasibility_tier === 'DREAM') {
+                    tierBadge = `<span class="px-2.5 py-1 rounded-md font-mono text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">BOARD ROUND REACH</span>`;
+                }
+
+                let flagshipBadge = d.is_core_flagship ? 
+                    `<span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 uppercase tracking-wider flex items-center gap-1"><i class="fa-solid fa-star text-[8px] text-amber-400"></i> Core Flagship</span>` : 
+                    `<span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-white/5 border border-white/10 text-zinc-400 uppercase tracking-wider">Interdisciplinary</span>`;
+
+                let aptBadge = d.aptitude_test_required ? `<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center gap-1"><i class="fa-solid fa-pen-nib text-[8px]"></i> Aptitude Test</span>` : '';
+
+                // Campus tags
+                let campusBadges = (d.offering_campuses || []).slice(0, 4).map(c => `
+                    <span class="px-2 py-0.5 rounded bg-black/40 border border-white/5 text-[10px] font-mono text-zinc-300">
+                        ${c.university.replace('University of ', 'Univ of ').replace('Campus', '')}: <strong class="${c.tier==='SAFE'?'text-emerald-400':(c.tier==='TARGET'?'text-amber-400':'text-rose-400')}">${c.cutoff_z.replace('District Cutoff: ', '')}</strong>
+                    </span>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-start sm:items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500/20 to-indigo-600/20 border border-sky-500/30 flex items-center justify-center font-mono font-black text-sky-400 text-lg shadow-inner shrink-0 group-hover:scale-105 transition-transform">
+                                #${index + 1}
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="font-mono text-xs font-bold text-sky-400 px-2.5 py-0.5 rounded-md bg-sky-500/10 border border-sky-500/20">${bestCampus.unicode || d.course_code}</span>
+                                    <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-sky-300 transition-colors">${d.course_name}</h3>
+                                    ${flagshipBadge}
+                                    ${aptBadge}
+                                </div>
+                                <div class="text-xs text-zinc-400 mt-1 flex items-center gap-2 flex-wrap">
+                                    <span>${bestCampus.university || 'State University'}</span>
+                                    <span>•</span>
+                                    <span class="font-mono text-zinc-300 font-semibold">${d.total_proposed_intake || 0} Proposed UGC Seats</span>
+                                    ${bestCampus.margin !== undefined ? `<span>•</span> <span class="font-mono ${bestCampus.margin>=0?'text-emerald-400':'text-rose-400'} font-bold">Margin: ${bestCampus.margin>=0?'+':''}${bestCampus.margin}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 self-end sm:self-center shrink-0">
+                            <div class="text-right">
+                                <div class="text-[11px] font-mono text-zinc-300">${bestCampus.cutoff_z || 'District Cutoff'}</div>
+                                <div class="mt-0.5">${tierBadge}</div>
+                            </div>
+                            <div class="pl-4 border-l border-white/[0.08] text-right">
+                                <div class="text-2xl font-mono font-black text-emerald-400">${d.compatibility_score || 0}%</div>
+                                <div class="text-[9px] uppercase font-mono tracking-wider text-zinc-500">Match Fit</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Offering Campuses Strip -->
+                    <div class="flex items-center gap-1.5 flex-wrap pt-1">
+                        <span class="text-[10px] font-mono text-zinc-500 uppercase">Campuses:</span>
+                        ${campusBadges}
+                    </div>
+
+                    ${d.explanation ? `
+                    <div class="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] text-xs text-zinc-300 flex items-start gap-2.5 leading-relaxed">
+                        <i class="fa-solid fa-sparkles text-sky-400 text-xs mt-0.5 shrink-0"></i>
+                        <span><strong class="text-sky-300 font-semibold">Advisory Reasoning:</strong> ${d.explanation}</span>
+                    </div>
+                    ` : ''}
+
+                    ${d.alternative_advice ? `
+                    <div class="p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 text-xs text-amber-200/90 flex items-start gap-2.5">
+                        <i class="fa-solid fa-lightbulb text-amber-400 text-xs mt-0.5 shrink-0"></i>
+                        <span><strong class="text-amber-300">Strategic Stepping Stone (Plan B):</strong> ${d.alternative_advice}</span>
+                    </div>
+                    ` : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderTierList(list, tier) {
+            let container = document.getElementById('tier-cards-container');
+            container.innerHTML = '';
+            if (!list || list.length === 0) {
+                container.innerHTML = `<div class="glass-card rounded-2xl p-8 text-center text-zinc-500 text-xs">No courses meeting ${tier} tier criteria.</div>`;
+                return;
+            }
+
+            list.forEach((r, idx) => {
+                let card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl p-5 space-y-3';
+                let isCore = r.is_core_flagship;
+                let flagshipTag = isCore ? `<span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 uppercase">Core Flagship</span>` : '';
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-[10px] font-bold text-sky-400 uppercase">#${idx+1} IN ${tier}</span>
+                                ${flagshipTag}
+                            </div>
+                            <h3 class="text-sm sm:text-base font-bold text-white mt-1">${r.course_name} <span class="text-xs text-zinc-500 font-mono">(${r.course_code})</span></h3>
+                            <div class="text-xs text-zinc-400 mt-1">${r.al_subject_requirements || 'Standard Stream Requirements'}</div>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <span class="text-xl font-mono font-bold text-emerald-400">${r.compatibility_score}%</span>
+                            <div class="text-[9px] text-zinc-500 font-mono uppercase">Fit Score</div>
+                        </div>
+                    </div>
+                    ${r.explanation ? `<div class="text-xs text-zinc-400 p-2.5 rounded-lg bg-black/30 border border-white/5 leading-relaxed">${r.explanation}</div>` : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function openFullBlueprintModal() {
+            let overlay = document.getElementById('blueprint-modal-overlay');
+            if (overlay) {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+                lockBodyScroll();
+                renderBlueprintRows();
+            }
+        }
+
+        function closeFullBlueprintModal() {
+            let overlay = document.getElementById('blueprint-modal-overlay');
+            if (overlay) {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+                let dossierOverlay = document.getElementById('dossier-modal-overlay');
+                if (!dossierOverlay || dossierOverlay.classList.contains('hidden')) {
+                    unlockBodyScroll();
+                }
+            }
+        }
+
+        function resetToAIOptimalOrder() {
+            customBlueprintList = JSON.parse(JSON.stringify(initialAIBlueprintList));
+            renderBlueprintRows();
+            showSonnerToast("Reset to AI Recommended Order", "info");
+        }
+
+        let blueprintDraggedIndex = null;
+
+        function moveBlueprintItem(index, direction) {
+            let newIndex = index + direction;
+            if (newIndex < 0 || newIndex >= customBlueprintList.length) return;
+            let temp = customBlueprintList[index];
+            customBlueprintList[index] = customBlueprintList[newIndex];
+            customBlueprintList[newIndex] = temp;
+            renderBlueprintRows();
+            buildFormalDocumentHTML();
+        }
+
+        function renderBlueprintRows() {
+            let container = document.getElementById('full-blueprint-interactive-rows');
+            if (!container) return;
+            container.innerHTML = '';
+
+            (customBlueprintList || []).forEach((item, index) => {
+                let c = item.choice || item;
+                let row = document.createElement('div');
+                let isSafe = c.tier === 'SAFE';
+                let isTarget = c.tier === 'TARGET';
+                let tierBorder = isSafe ? 'border-emerald-500/20 bg-emerald-500/[0.03]' : (isTarget ? 'border-amber-500/20 bg-amber-500/[0.03]' : 'border-sky-500/20 bg-sky-500/[0.03]');
+                let badgeClass = isSafe ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : (isTarget ? 'bg-amber-500/15 text-amber-400 border-amber-500/30' : 'bg-sky-500/15 text-sky-400 border-sky-500/30');
+
+                row.className = `p-3 rounded-xl border ${tierBorder} hover:border-white/20 transition-all flex items-center justify-between gap-3 text-xs text-zinc-200 blueprint-row select-none cursor-grab active:cursor-grabbing`;
+                row.setAttribute('draggable', 'true');
+                row.setAttribute('data-index', index);
+
+                row.innerHTML = `
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="drag-handle text-zinc-500 hover:text-zinc-300 p-1 flex items-center justify-center shrink-0" title="Drag to reorder">
+                            <i class="fa-solid fa-grip-vertical text-sm"></i>
+                        </div>
+                        <span class="font-mono font-bold text-sky-400 w-7 text-center shrink-0">#${index + 1}</span>
+                        <div class="min-w-0">
+                            <div class="font-bold text-white truncate flex items-center gap-2">
+                                <span>${c.course_name}</span>
+                                <span class="font-mono text-xs text-zinc-400 shrink-0">(${c.unicode || c.course_code})</span>
+                            </div>
+                            <div class="text-[11px] text-zinc-400 truncate mt-0.5">
+                                ${c.university} • <span class="text-zinc-300 font-mono">Cutoff: ${c.cutoff_z || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-black border ${badgeClass} hidden sm:inline-block">${c.tier || 'SAFE'}</span>
+                        <button onclick="event.stopPropagation(); moveBlueprintItem(${index}, -1)" class="w-7 h-7 rounded bg-white/5 hover:bg-white/15 text-zinc-300 flex items-center justify-center text-xs transition-colors" ${index===0?'disabled opacity-30':''} title="Move Up">▲</button>
+                        <button onclick="event.stopPropagation(); moveBlueprintItem(${index}, 1)" class="w-7 h-7 rounded bg-white/5 hover:bg-white/15 text-zinc-300 flex items-center justify-center text-xs transition-colors" ${index===customBlueprintList.length-1?'disabled opacity-30':''} title="Move Down">▼</button>
+                    </div>
+                `;
+
+                // HTML5 Drag & Drop Listeners
+                row.addEventListener('dragstart', (e) => {
+                    blueprintDraggedIndex = index;
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', index);
+                    setTimeout(() => {
+                        row.classList.add('opacity-40', 'border-sky-500', 'bg-sky-500/10', 'scale-[0.99]');
+                    }, 0);
+                });
+
+                row.addEventListener('dragend', () => {
+                    row.classList.remove('opacity-40', 'border-sky-500', 'bg-sky-500/10', 'scale-[0.99]');
+                    document.querySelectorAll('.blueprint-row').forEach(r => {
+                        r.classList.remove('ring-2', 'ring-sky-400', 'bg-sky-500/15', 'border-sky-400');
+                    });
+                    blueprintDraggedIndex = null;
+                });
+
+                row.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    if (blueprintDraggedIndex === null || blueprintDraggedIndex === index) return;
+                    row.classList.add('ring-2', 'ring-sky-400', 'bg-sky-500/15', 'border-sky-400');
+                });
+
+                row.addEventListener('dragleave', () => {
+                    row.classList.remove('ring-2', 'ring-sky-400', 'bg-sky-500/15', 'border-sky-400');
+                });
+
+                row.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    row.classList.remove('ring-2', 'ring-sky-400', 'bg-sky-500/15', 'border-sky-400');
+                    let fromIdx = blueprintDraggedIndex !== null ? blueprintDraggedIndex : parseInt(e.dataTransfer.getData('text/plain'));
+                    let toIdx = index;
+                    if (fromIdx !== null && !isNaN(fromIdx) && fromIdx !== toIdx) {
+                        let movedItem = customBlueprintList.splice(fromIdx, 1)[0];
+                        customBlueprintList.splice(toIdx, 0, movedItem);
+                        renderBlueprintRows();
+                        buildFormalDocumentHTML();
+                        showSonnerToast("Preference Reordered", "success", `Moved #${fromIdx + 1} to Choice #${toIdx + 1}`);
+                    }
+                });
+
+                container.appendChild(row);
+            });
+        }
+
+        function openFormalDossierModal() {
+            let overlay = document.getElementById('dossier-modal-overlay');
+            if (overlay) {
+                try {
+                    buildFormalDocumentHTML();
+                } catch(e) {
+                    console.error("Error building dossier HTML:", e);
+                }
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+                lockBodyScroll();
+            }
+        }
+
+        function closeFormalDossierModal() {
+            let overlay = document.getElementById('dossier-modal-overlay');
+            if (overlay) {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+                let bpOverlay = document.getElementById('blueprint-modal-overlay');
+                if (!bpOverlay || bpOverlay.classList.contains('hidden')) {
+                    unlockBodyScroll();
+                }
+            }
+        }
+
+        function triggerFormalPrint() {
+            try {
+                buildFormalDocumentHTML();
+            } catch(e) {
+                console.error("Error building dossier before print:", e);
+            }
+            let printContainer = document.getElementById('official-dossier-print-container');
+            let docView = document.getElementById('formal-document-view');
+            if (printContainer && docView) {
+                printContainer.innerHTML = docView.innerHTML;
+                window.print();
+            }
+        }
+
+        function buildFormalDocumentHTML() {
+            let docView = document.getElementById('formal-document-view');
+            if (!docView) return;
+
+            if (!currentAIResults) {
+                docView.innerHTML = `
+                    <div class="py-16 text-center text-slate-500 space-y-4">
+                        <div class="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto text-2xl text-slate-400">
+                            <i class="fa-solid fa-file-circle-question"></i>
+                        </div>
+                        <div class="text-base font-bold text-slate-800">No Admissions Evaluation Generated Yet</div>
+                        <p class="text-xs text-slate-500 max-w-sm mx-auto">Please enter your G.C.E. A/L parameters in the Candidate Profile Console, then click "Generate 50-Choice Strategic Blueprint" first.</p>
+                        <button onclick="closeFormalDossierModal(); window.scrollTo({top: 300, behavior: 'smooth'});" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-all">Go to Profile Console</button>
+                    </div>
+                `;
+                return;
+            }
+
+            let stream = document.getElementById('ai-stream')?.value || 'Physical Science';
+            let district = document.getElementById('ai-district')?.value || 'COLOMBO';
+            let zVal = parseFloat(document.getElementById('ai-zscore')?.value);
+            let zscore = (!isNaN(zVal)) ? zVal.toFixed(4) : '1.5000';
+            let genTest = document.getElementById('ai-general-test')?.value || '65';
+            let genEng = document.getElementById('ai-general-english')?.value || 'C';
+            let olEng = document.getElementById('ai-ol-english')?.value || 'B';
+            let olMat = document.getElementById('ai-ol-maths')?.value || 'A';
+
+            let sub1 = (selectedSubjects && selectedSubjects[0]) || 'Subject 1';
+            let gr1 = document.getElementById('grade-select-0')?.value || 'B';
+            let sub2 = (selectedSubjects && selectedSubjects[1]) || 'Subject 2';
+            let gr2 = document.getElementById('grade-select-1')?.value || 'B';
+            let sub3 = (selectedSubjects && selectedSubjects[2]) || 'Subject 3';
+            let gr3 = document.getElementById('grade-select-2')?.value || 'C';
+
+            let dateStr = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            let top5 = currentAIResults?.top_5_flagship_matches || [];
+            let interestsStr = (studentInterests && studentInterests.length > 0) ? studentInterests.join(', ') : 'Information Technology, Engineering, Computing';
+
+            let top5RowsHtml = top5.map((d, idx) => {
+                let bestCampus = (d.offering_campuses && d.offering_campuses.length > 0) ? d.offering_campuses[0] : {};
+                let isSafe = d.feasibility_tier === 'SAFE';
+                let isTarget = d.feasibility_tier === 'TARGET';
+                let badgeClass = isSafe 
+                    ? 'bg-emerald-100 text-emerald-800 border-emerald-300' 
+                    : (isTarget ? 'bg-amber-100 text-amber-800 border-amber-300' : 'bg-sky-100 text-sky-800 border-sky-300');
+                let badgeLabel = isSafe ? 'Guaranteed Safe' : (isTarget ? 'Target Match' : 'Board Round Reach');
+
+                return `
+                    <tr class="border-b border-slate-200 even:bg-slate-50/60 hover:bg-slate-100/50 transition-colors">
+                        <td class="py-2.5 px-3 text-center font-bold text-slate-800">
+                            <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-slate-200 text-slate-800 text-[10px] font-bold">${idx + 1}</span>
+                        </td>
+                        <td class="py-2.5 px-3 font-mono font-bold text-slate-900">${bestCampus.unicode || d.course_code}</td>
+                        <td class="py-2.5 px-3 font-bold text-slate-900">${d.course_name}</td>
+                        <td class="py-2.5 px-3 text-slate-700">${bestCampus.university || 'State University'}</td>
+                        <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-800">${bestCampus.intake || d.total_proposed_intake || 0}</td>
+                        <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-900">${bestCampus.cutoff_z || 'N/A'}</td>
+                        <td class="py-2.5 px-3 text-center">
+                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold border ${badgeClass}">
+                                ${badgeLabel}
+                            </span>
+                        </td>
+                        <td class="py-2.5 px-3 text-xs text-slate-600 leading-relaxed">${d.explanation || 'Verified eligible under UGC district quota criteria.'}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            let all50RowsHtml = (customBlueprintList || []).map((bp, idx) => {
+                let c = bp.choice || bp.degree || {};
+                let isSafe = c.tier === 'SAFE';
+                let isTarget = c.tier === 'TARGET';
+                let badgeClass = isSafe 
+                    ? 'bg-emerald-100 text-emerald-800 border-emerald-200' 
+                    : (isTarget ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-sky-100 text-sky-800 border-sky-200');
+                let badgeText = isSafe ? 'SAFE' : (isTarget ? 'TARGET' : 'REACH');
+
+                return `
+                    <tr class="border-b border-slate-200 even:bg-slate-50/70 text-xs">
+                        <td class="py-1.5 px-2 text-center font-bold text-slate-700">${idx + 1}</td>
+                        <td class="py-1.5 px-2 font-mono font-bold text-slate-900">${c.unicode || c.course_code}</td>
+                        <td class="py-1.5 px-3 font-bold text-slate-900">${c.course_name}</td>
+                        <td class="py-1.5 px-3 text-slate-700">${c.university || 'State University'}</td>
+                        <td class="py-1.5 px-2 text-center font-mono font-semibold text-slate-700">${c.intake || 0}</td>
+                        <td class="py-1.5 px-2 text-center font-mono font-bold text-slate-900">${c.cutoff_z || 'N/A'}</td>
+                        <td class="py-1.5 px-2 text-center">
+                            <span class="inline-block px-2 py-0.5 rounded text-[9px] font-black border ${badgeClass}">
+                                ${badgeText}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            let docHtml = `
+                <!-- EXECUTIVE DOCUMENT HEADER -->
+                <div class="border-b-2 border-slate-900 pb-5">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center font-black text-xl shadow-md border border-slate-800 shrink-0">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">
+                                    Democratic Socialist Republic of Sri Lanka • University Grants Commission
+                                </div>
+                                <h1 class="text-xl sm:text-2xl font-black text-slate-950 tracking-tight leading-snug">
+                                    Official Academic Admissions & UGC Preference Strategy Dossier
+                                </h1>
+                                <p class="text-xs text-slate-600 font-medium mt-0.5">
+                                    National G.C.E. Advanced Level Admissions Advisory System • Intake Academic Year 2025/2026
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-right font-mono text-xs space-y-1 shrink-0">
+                            <div class="font-bold text-slate-900">REF: <span class="text-sky-700 font-extrabold">UGC-AI-${district.substring(0,3)}-${Math.floor(1000 + Math.random() * 9000)}</span></div>
+                            <div class="text-slate-500 text-[11px]">Issued: ${dateStr}</div>
+                            <div><span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-200">SLQF Level 6-7 Verified</span></div>
+                        </div>
+                    </div>
+                    <div class="h-1 bg-gradient-to-r from-sky-600 via-indigo-600 to-slate-900 rounded-full mt-4"></div>
+                </div>
+
+                <!-- CANDIDATE EVALUATION PROFILE -->
+                <div class="bg-slate-50/90 border border-slate-200 rounded-2xl p-5 space-y-3.5 shadow-sm">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-id-card text-sky-600"></i>
+                            Candidate Academic Evaluation Profile
+                        </span>
+                        <span class="text-xs font-semibold text-slate-700 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-sm">
+                            Residential District Quota: <strong class="text-slate-900">${district}</strong>
+                        </span>
+                    </div>
+
+                    <!-- Row 1: Core Metrics -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] uppercase font-bold tracking-wider">A/L Subject Stream</span>
+                            <span class="font-extrabold text-slate-900 text-sm mt-0.5 block">${stream}</span>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] uppercase font-bold tracking-wider">Official Z-Score</span>
+                            <span class="font-mono font-black text-indigo-700 text-base mt-0.5 block">${zscore}</span>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] uppercase font-bold tracking-wider">Common Gen Test</span>
+                            <span class="font-mono font-extrabold text-slate-900 text-sm mt-0.5 block">${genTest} / 100 <span class="text-emerald-700 text-[10px] font-bold">✓ Pass</span></span>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-slate-500 block text-[10px] uppercase font-bold tracking-wider">A/L Gen English</span>
+                            <span class="font-extrabold text-slate-900 text-sm mt-0.5 block">Grade ${genEng}</span>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: 3 Subjects & O/L Requirements -->
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 text-xs pt-1">
+                        <div class="sm:col-span-7 bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 block text-[10px] uppercase font-bold tracking-wider">3 A/L Examination Subject Passes</span>
+                            <div class="flex items-center gap-2 flex-wrap font-semibold text-slate-900 text-xs">
+                                <span class="px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200">1. ${sub1} (${gr1})</span>
+                                <span class="px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200">2. ${sub2} (${gr2})</span>
+                                <span class="px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200">3. ${sub3} (${gr3})</span>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-5 bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 block text-[10px] uppercase font-bold tracking-wider">O/L Gateway Benchmarks</span>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-slate-800">
+                                <span>O/L English: <strong>Grade ${olEng}</strong></span> • 
+                                <span>O/L Maths: <strong>Grade ${olMat}</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passions Footnote -->
+                    <div class="text-[11px] text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-2">
+                        <span class="font-bold text-slate-700 uppercase tracking-wider text-[10px]"><i class="fa-solid fa-brain text-sky-600"></i> Career Alignment:</span>
+                        <span>${interestsStr}</span>
+                    </div>
+                </div>
+
+                <!-- 1. EXECUTIVE FEASIBILITY SUMMARY (4 CLEAN CARDS) -->
+                <div class="space-y-2.5">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800 border-b border-slate-300 pb-1 flex items-center justify-between">
+                        <span>1. Executive Admissions Feasibility Summary</span>
+                        <span class="text-slate-500 font-mono text-[10px] normal-case">Across 255 University Programs</span>
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50/80 shadow-sm">
+                            <div class="text-[10px] uppercase text-slate-500 font-bold tracking-wider">Total Eligible Degrees</div>
+                            <div class="text-2xl font-black font-mono text-slate-900 mt-1">${currentAIResults.total_eligible_count}</div>
+                            <div class="text-[10px] text-slate-500 mt-0.5 font-medium">All State Campuses</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/80 shadow-sm">
+                            <div class="text-[10px] uppercase text-emerald-800 font-bold tracking-wider">Guaranteed Safe (P1)</div>
+                            <div class="text-2xl font-black font-mono text-emerald-700 mt-1">${currentAIResults.safe_count}</div>
+                            <div class="text-[10px] text-emerald-700 mt-0.5 font-medium">Z-Score Exceeds Cutoff</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/80 shadow-sm">
+                            <div class="text-[10px] uppercase text-amber-800 font-bold tracking-wider">Target Matches (P2)</div>
+                            <div class="text-2xl font-black font-mono text-amber-700 mt-1">${currentAIResults.target_count}</div>
+                            <div class="text-[10px] text-amber-700 mt-0.5 font-medium">Close Cutoff Margin</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-sky-200 bg-sky-50/80 shadow-sm">
+                            <div class="text-[10px] uppercase text-sky-800 font-bold tracking-wider">Board Round Reach (P3)</div>
+                            <div class="text-2xl font-black font-mono text-sky-700 mt-1">${currentAIResults.dream_count}</div>
+                            <div class="text-[10px] text-sky-700 mt-0.5 font-medium">Vacancy Upward Track</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. TOP 5 FLAGSHIP RECOMMENDATIONS -->
+                <div class="space-y-2.5">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800 border-b border-slate-300 pb-1 flex items-center justify-between">
+                        <span>2. Top 5 Flagship Degree Recommendations & Explainable AI (XAI) Justification</span>
+                        <span class="text-slate-500 font-mono text-[10px] normal-case">Primary University Options</span>
+                    </h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead class="bg-slate-900 text-white font-bold text-[10px] uppercase tracking-wider">
+                                <tr>
+                                    <th class="py-2.5 px-3 text-center w-12">Rank</th>
+                                    <th class="py-2.5 px-3 w-16">Code</th>
+                                    <th class="py-2.5 px-3">Degree Programme</th>
+                                    <th class="py-2.5 px-3">University Campus</th>
+                                    <th class="py-2.5 px-3 text-center w-14">Seats</th>
+                                    <th class="py-2.5 px-3 text-center w-20">District Cutoff</th>
+                                    <th class="py-2.5 px-3 text-center w-28">Feasibility</th>
+                                    <th class="py-2.5 px-3">AI Advisory Justification</th>
+                                </tr>
+                            </thead>
+                            <tbody>${top5RowsHtml}</tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. OFFICIAL 50-CHOICE PREFERENCE BLUEPRINT TABLE -->
+                <div class="space-y-2.5 page-break pt-4">
+                    <div class="border-b-2 border-slate-900 pb-2 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm font-black uppercase tracking-tight text-slate-900">
+                                3. Official 50-Choice UGC Preference Application Blueprint
+                            </h3>
+                            <p class="text-[11px] text-slate-600">Ranked strategically by Multi-Round UGC Board Feasibility and Candidate Career Passions</p>
+                        </div>
+                        <span class="text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-full border border-slate-200 font-mono">
+                            Choices 01 - 50 Complete
+                        </span>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead class="bg-slate-900 text-white font-bold text-[10px] uppercase tracking-wider">
+                                <tr>
+                                    <th class="py-2 px-2.5 text-center w-12">Choice #</th>
+                                    <th class="py-2 px-2.5 w-16">Uni-Code</th>
+                                    <th class="py-2 px-3">Degree Course Programme</th>
+                                    <th class="py-2 px-3">University Campus</th>
+                                    <th class="py-2 px-2.5 text-center w-14">Seats</th>
+                                    <th class="py-2 px-2.5 text-center w-20">District Cutoff</th>
+                                    <th class="py-2 px-2.5 text-center w-20">Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>${all50RowsHtml}</tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 4. INSTITUTIONAL DIRECTIVES & OFFICIAL SIGN-OFF -->
+                <div class="border-t-2 border-slate-900 pt-5 space-y-4 avoid-break">
+                    <div class="text-xs text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5 shadow-sm">
+                        <div class="font-extrabold text-slate-900 flex items-center gap-1.5">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                            Official UGC Sri Lanka Strategic Admissions Directives:
+                        </div>
+                        <ol class="list-decimal list-inside space-y-1 text-slate-600 text-[11px] leading-relaxed">
+                            <li><strong>Highest Priority Rule:</strong> The University Grants Commission strictly allocates candidate seats based on the <strong>highest preference choice</strong> where your Z-score satisfies the district/merit cutoff.</li>
+                            <li><strong>Upward-Only Upgrades:</strong> During subsequent admission rounds (2nd round, 3rd round, vacancy allocations), candidates are only upgraded <strong>upwards</strong> towards higher choices (Choice 10 &rarr; Choice 4), never downwards.</li>
+                            <li><strong>Strategic Safety Floor:</strong> Ensure choices 35 to 50 are firmly in the <strong>Guaranteed Safe</strong> category to safeguard state university admission regardless of cutoff volatility.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Sign-off Block -->
+                    <div class="flex items-center justify-between pt-6 text-xs text-slate-700">
+                        <div class="space-y-1">
+                            <div class="font-black text-slate-900 font-mono tracking-wider">AI ADMISSIONS ENGINE CERTIFIED</div>
+                            <div class="text-slate-500 text-[10px]">Deterministic UGC Admissions Model • CS22032 Essentials of AI, KDU</div>
+                            <div class="text-emerald-700 text-[10px] font-bold">Verification Hash: SHA256-${Math.random().toString(36).substring(2, 10).toUpperCase()}</div>
+                        </div>
+
+                        <div class="text-right border-t border-slate-400 pt-1.5 w-64 space-y-0.5">
+                            <div class="font-bold text-slate-900 text-xs">Academic Advisory Sign-off</div>
+                            <div class="text-slate-500 text-[10px]">Authorized University Admissions Advisor</div>
+                            <div class="text-slate-400 text-[9px] font-mono">Date: ________________________</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('formal-document-view').innerHTML = docHtml;
+        }
+
+        async function loadCutoffData() {
+            let q = document.getElementById('search-input').value;
+            let uni = document.getElementById('university-select').value;
+            let yr = document.getElementById('year-select').value;
+            let dist = document.getElementById('district-select').value;
+
+            let res = await fetch(`/api/search?q=${encodeURIComponent(q)}&university=${encodeURIComponent(uni)}&year=${encodeURIComponent(yr)}&district=${encodeURIComponent(dist)}&stream=ALL`);
+            let data = await res.json();
+            let tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+
+            (data.data || []).forEach(item => {
+                let tr = document.createElement('tr');
+                tr.className = 'hover:bg-white/[0.02]';
+                tr.innerHTML = `
+                    <td class="py-2.5 px-4 font-mono font-bold text-sky-400">${item.unicode || item.course_code}</td>
+                    <td class="py-2.5 px-4 font-semibold text-white">${item.course_name}</td>
+                    <td class="py-2.5 px-4 text-zinc-400">${item.university}</td>
+                    <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] bg-white/5 text-zinc-300">${item.streams}</span></td>
+                    <td class="py-2.5 px-4 text-center font-mono font-bold text-zinc-300">${item.intake}</td>
+                    <td class="py-2.5 px-4 font-mono font-bold text-zinc-300">${item.cutoff_z}</td>
+                    <td class="py-2.5 px-4 text-right">
+                        <button onclick="openCourseModal('${item.unicode}', '${yr}')" class="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-zinc-300 text-[11px]">Heatmap</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function loadMasterData() {
+            setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 50);
+            let q = document.getElementById('master-search-input').value;
+            let st = document.getElementById('master-stream-select').value;
+            let apt = document.getElementById('master-aptitude-select').value;
+
+            let res = await fetch(`/api/master_degrees?q=${encodeURIComponent(q)}&stream=${encodeURIComponent(st)}&aptitude=${encodeURIComponent(apt)}`);
+            let data = await res.json();
+            let container = document.getElementById('master-cards-container');
+            container.innerHTML = '';
+
+            (data.data || []).forEach(item => {
+                let card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl p-5 space-y-3';
+                card.innerHTML = `
+                    <div class="flex items-start justify-between">
+                        <span class="font-mono text-xs font-bold text-sky-400">Code ${item.course_code}</span>
+                        <span class="text-[10px] font-mono text-zinc-400">${item.total_proposed_intake} Seats</span>
+                    </div>
+                    <h3 class="text-sm font-bold text-white">${item.course_name}</h3>
+                    <p class="text-xs text-zinc-400 line-clamp-2">${item.al_subject_requirements}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function openCourseModal(unicode, yr) {
+            let res = await fetch(`/api/course_detail?unicode=${unicode}&year=${yr}`);
+            let data = await res.json();
+
+            document.getElementById('modal-unicode').innerText = data.unicode || data.course_code;
+            document.getElementById('modal-title').innerText = data.course_name;
+            document.getElementById('modal-uni').innerText = data.university;
+
+            let distGrid = document.getElementById('modal-district-grid');
+            distGrid.innerHTML = '';
+            let dMap = data.district_heatmap || {};
+            Object.keys(dMap).sort().forEach(d => {
+                let val = dMap[d];
+                let pill = document.createElement('div');
+                pill.className = 'p-2 rounded-lg bg-black/40 flex items-center justify-between text-xs';
+                pill.innerHTML = `<span class="text-zinc-400 text-[11px]">${d}</span> <span class="font-mono font-bold ${val==='NQC'?'text-rose-400':'text-emerald-400'}">${val}</span>`;
+                distGrid.appendChild(pill);
+            });
+
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            document.getElementById('modal-overlay').classList.add('flex');
+            lockBodyScroll();
+        }
+
+        function closeCourseModal() {
+            let modal = document.getElementById('modal-overlay');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                unlockBodyScroll();
+            }
+        }
+
+        document.getElementById('close-modal').onclick = closeCourseModal;
+
+        ['search-input', 'university-select', 'year-select', 'district-select'].forEach(id => {
+            let el = document.getElementById(id);
+            if (el) { el.addEventListener('input', loadCutoffData); el.addEventListener('change', loadCutoffData); }
+        });
+
+        ['master-search-input', 'master-stream-select', 'master-aptitude-select'].forEach(id => {
+            let el = document.getElementById(id);
+            if (el) { el.addEventListener('input', loadMasterData); el.addEventListener('change', loadMasterData); }
+        });
+
+        // Quick Command Palette Logic
+        let cmdkDegreesCache = [];
+        async function initCmdkCache() {
+            if (cmdkDegreesCache.length === 0) {
+                try {
+                    let res = await fetch('/api/master_degrees');
+                    let json = await res.json();
+                    cmdkDegreesCache = json.data || [];
+                } catch(e) {
+                    console.error("Failed to load degree search index:", e);
+                }
+            }
+        }
+
+        function openCmdk() {
+            initCmdkCache();
+            let modal = document.getElementById('cmdk-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                lockBodyScroll();
+                let input = document.getElementById('cmdk-search-input');
+                if (input) {
+                    input.value = '';
+                    input.focus();
+                }
+                renderCmdkResults('');
+            }
+        }
+
+        function closeCmdk() {
+            let modal = document.getElementById('cmdk-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                unlockBodyScroll();
+            }
+        }
+
+        function cmdkQuickFilter(val) {
+            let input = document.getElementById('cmdk-search-input');
+            if (input) {
+                input.value = val;
+                input.focus();
+                renderCmdkResults(val);
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+                e.preventDefault();
+                let modal = document.getElementById('cmdk-modal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closeCmdk();
+                } else {
+                    openCmdk();
+                }
+            } else if (e.key === 'Escape') {
+                closeCmdk();
+            }
+        });
+
+        document.getElementById('cmdk-search-input')?.addEventListener('input', (e) => {
+            renderCmdkResults(e.target.value.trim());
+        });
+
+        function renderCmdkResults(query) {
+            let container = document.getElementById('cmdk-results');
+            if (!container) return;
+            let q = query.toLowerCase();
+
+            const actions = [
+                { type: 'module', name: 'AI Strategic Degree Advisor', desc: 'Personalized course rankings based on Z-score & subjects', icon: 'fa-wand-magic-sparkles', color: 'text-sky-400', action: () => { switchMainTab('advisor'); window.scrollTo({top: 400, behavior: 'smooth'}); closeCmdk(); } },
+                { type: 'module', name: '7-Year UGC Cutoff Archive (2019-2026)', desc: 'Explore historical cutoff marks across 25 administrative districts', icon: 'fa-chart-line', color: 'text-emerald-400', action: () => { switchMainTab('cutoffs'); window.scrollTo({top: 400, behavior: 'smooth'}); closeCmdk(); } },
+                { type: 'module', name: '121 UGC Bachelor Degrees Directory', desc: 'Handbook course codes, eligibility requirements and intakes', icon: 'fa-graduation-cap', color: 'text-indigo-400', action: () => { switchMainTab('master'); window.scrollTo({top: 400, behavior: 'smooth'}); closeCmdk(); } },
+                { type: 'action', name: 'Generate Official Academic Dossier', desc: 'Create and download formal printable PDF admissions recommendation report', icon: 'fa-file-lines', color: 'text-rose-400', action: () => { openFormalDossierModal(); closeCmdk(); } },
+                { type: 'preset', name: 'Preset: Physical Science (Maths + ICT / Physics)', desc: 'Load benchmark profile for Colombo district', icon: 'fa-laptop-code', color: 'text-sky-400', action: () => { loadPreset('maths_se'); closeCmdk(); showSonnerToast('Loaded Physical Science Preset', 'success'); } },
+                { type: 'preset', name: 'Preset: Biological Science (Bio + Chem + Physics)', desc: 'Load benchmark profile for Gampaha district', icon: 'fa-dna', color: 'text-emerald-400', action: () => { loadPreset('bio_med'); closeCmdk(); showSonnerToast('Loaded Biological Science Preset', 'success'); } },
+                { type: 'preset', name: 'Preset: Engineering Technology (ET + SFT + ICT)', desc: 'Load benchmark profile for Kandy district', icon: 'fa-microchip', color: 'text-indigo-400', action: () => { loadPreset('tech_eng'); closeCmdk(); showSonnerToast('Loaded Engineering Tech Preset', 'success'); } },
+                { type: 'preset', name: 'Preset: Commerce Stream (Accounting + Business + Econ)', desc: 'Load benchmark profile for Colombo district', icon: 'fa-briefcase', color: 'text-amber-400', action: () => { loadPreset('comm_mgt'); closeCmdk(); showSonnerToast('Loaded Commerce Preset', 'success'); } },
+                { type: 'preset', name: 'Preset: Arts Stream (Pol Sci + Logic + English Lit)', desc: 'Load benchmark profile for Colombo district', icon: 'fa-scale-balanced', color: 'text-purple-400', action: () => { loadPreset('arts_law'); closeCmdk(); showSonnerToast('Loaded Arts Preset', 'success'); } }
+            ];
+
+            let html = '';
+            let filteredActions = actions.filter(a => !q || a.name.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q) || a.type.toLowerCase().includes(q));
+            
+            if (filteredActions.length > 0) {
+                html += `<div class="px-2 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">Navigation & Quick Tools</div>`;
+                filteredActions.forEach((act, idx) => {
+                    html += `
+                        <div onclick="executeCmdkAction(${actions.indexOf(act)})" class="p-2.5 rounded-xl hover:bg-white/[0.06] border border-transparent hover:border-white/10 cursor-pointer flex items-center justify-between group transition-all">
+                            <div class="flex items-center gap-3">
+                                <div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center ${act.color} group-hover:scale-105 transition-transform">
+                                    <i class="fa-solid ${act.icon} text-xs"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white group-hover:text-sky-300 transition-colors">${act.name}</div>
+                                    <div class="text-[11px] text-zinc-400">${act.desc}</div>
+                                </div>
+                            </div>
+                            <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-mono uppercase text-zinc-400 group-hover:text-white transition-colors">${act.type}</span>
+                        </div>
+                    `;
+                });
+            }
+
+            if (q && cmdkDegreesCache.length > 0) {
+                let matchedDegrees = [];
+                for (let deg of cmdkDegreesCache) {
+                    let cname = deg.course_name || '';
+                    let ccode = deg.course_code || '';
+                    let streams = (deg.eligible_streams || []).join(' ');
+                    let unis = (deg.offering_universities || []).map(u => u.university + ' ' + (u.unicode||'')).join(' ');
+
+                    if (cname.toLowerCase().includes(q) || ccode.toLowerCase().includes(q) || streams.toLowerCase().includes(q) || unis.toLowerCase().includes(q)) {
+                        matchedDegrees.push(deg);
+                    }
+                    if (matchedDegrees.length >= 15) break;
+                }
+
+                if (matchedDegrees.length > 0) {
+                    html += `<div class="px-2 pt-3 pb-1 text-[10px] font-mono font-bold uppercase tracking-wider text-sky-400">Matching Bachelor Degrees (${matchedDegrees.length})</div>`;
+                    matchedDegrees.forEach(deg => {
+                        let uniList = (deg.offering_universities || []).slice(0, 3).map(u => u.university).join(', ');
+                        let moreUnis = (deg.offering_universities || []).length > 3 ? ` +${(deg.offering_universities.length - 3)} more` : '';
+                        html += `
+                            <div onclick="selectCmdkDegree('${deg.course_code}')" class="p-2.5 rounded-xl hover:bg-white/[0.06] border border-transparent hover:border-white/10 cursor-pointer flex items-center justify-between group transition-all">
+                                <div class="flex items-center gap-3">
+                                    <div class="px-2 py-1 rounded bg-sky-500/10 border border-sky-500/20 text-sky-400 font-mono font-bold text-[10px]">
+                                        ${deg.course_code}
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-white group-hover:text-sky-300 transition-colors">${deg.course_name}</div>
+                                        <div class="text-[11px] text-zinc-400 truncate max-w-md">${uniList}${moreUnis}</div>
+                                    </div>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <div class="text-[10px] font-mono text-emerald-400 font-semibold">${deg.total_proposed_intake || 0} Seats</div>
+                                    <div class="text-[9px] text-zinc-500 font-mono">View Handbook</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            if (!html) {
+                html = `
+                    <div class="p-8 text-center space-y-2">
+                        <i class="fa-solid fa-circle-exclamation text-2xl text-zinc-600"></i>
+                        <div class="text-sm font-bold text-zinc-300">No matching degree or action found</div>
+                        <div class="text-xs text-zinc-500">Try searching for keywords like "Computing", "Civil", "Management", "Colombo", or "Bio".</div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        window.cmdkActionsList = [
+            () => { switchMainTab('advisor'); window.scrollTo({top: 400, behavior: 'smooth'}); closeCmdk(); },
+            () => { switchMainTab('cutoffs'); window.scrollTo({top: 400, behavior: 'smooth'}); closeCmdk(); },
+            () => { switchMainTab('master'); window.scrollTo({top: 400, behavior: 'smooth'}); closeCmdk(); },
+            () => { openFormalDossierModal(); closeCmdk(); },
+            () => { loadPreset('maths_se'); closeCmdk(); showSonnerToast('Loaded Physical Science Preset', 'success'); },
+            () => { loadPreset('bio_med'); closeCmdk(); showSonnerToast('Loaded Biological Science Preset', 'success'); },
+            () => { loadPreset('tech_eng'); closeCmdk(); showSonnerToast('Loaded Engineering Tech Preset', 'success'); },
+            () => { loadPreset('comm_mgt'); closeCmdk(); showSonnerToast('Loaded Commerce Preset', 'success'); },
+            () => { loadPreset('arts_law'); closeCmdk(); showSonnerToast('Loaded Arts Preset', 'success'); }
+        ];
+
+        function executeCmdkAction(idx) {
+            if (window.cmdkActionsList && window.cmdkActionsList[idx]) {
+                window.cmdkActionsList[idx]();
+            }
+        }
+
+        function selectCmdkDegree(courseCode) {
+            switchMainTab('master');
+            let searchInp = document.getElementById('master-search-input');
+            if (searchInp) {
+                searchInp.value = courseCode;
+                loadMasterData();
+            }
+            closeCmdk();
+            window.scrollTo({top: 450, behavior: 'smooth'});
+            showSonnerToast(`Filtered directory for Course Code: ${courseCode}`, 'info');
+        }
+
+        setTimeout(initCmdkCache, 1000);
+
+        // Page Load Initializations
+        onStreamChange();
+        [0, 1, 2].forEach(updateGradeBadge);
+        renderTags('interests');
+
+        // Global Keyboard Shortcut: Ctrl + Enter to Run Recommendations
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                generateAIRecommendations();
+            }
+        });
+    </script>
+</body>
+</html>

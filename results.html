@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Academic Advising Report | Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --accent-primary: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #c4b5fd;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            transition: all 0.2s ease;
+        }
+
+        .nav-back:hover { background: rgba(139, 92, 246, 0.2); }
+
+        .profile-summary-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .profile-info h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 6px;
+        }
+
+        .profile-info p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .ml-banner {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: 20px;
+            padding: 20px 25px;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .ml-badge-icon {
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ml-details h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            color: #e2e8f0;
+            margin-bottom: 4px;
+        }
+
+        .ml-details p { color: #cbd5e1; font-size: 0.95rem; }
+
+        .section-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .degree-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .degree-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 15px 35px -5px rgba(139, 92, 246, 0.25);
+        }
+
+        .degree-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .rank-badge {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .degree-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        .uni-tag {
+            color: #38bdf8;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .match-score-box {
+            text-align: right;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 12px 20px;
+            border-radius: 16px;
+        }
+
+        .match-score-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #34d399;
+            line-height: 1;
+        }
+
+        .match-score-lbl {
+            font-size: 0.75rem;
+            color: #a7f3d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .explanation-box {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin-bottom: 20px;
+        }
+
+        .explanation-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        .reason-list { list-style: none; }
+
+        .reason-list li {
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-block h5 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .chip-tag {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--card-border);
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: #f1f5f9;
+        }
+
+        .chip-skill {
+            background: rgba(236, 72, 153, 0.15);
+            border-color: rgba(236, 72, 153, 0.3);
+            color: #f472b6;
+        }
+
+        .footer { text-align: center; margin-top: 50px; color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/" class="nav-back">← Back to Profile Input</a>
+
+    <!-- Student Profile Header -->
+    <div class="profile-summary-card">
+        <div class="profile-info">
+            <h2>Advising Report for {{ student.name }}</h2>
+            <p><strong>A/L Stream:</strong> {{ student.stream }} | <strong>District:</strong> {{ student.district }} | <strong>Target Career:</strong> {{ student.career_goal }}</p>
+        </div>
+    </div>
+
+    <!-- AI Machine Learning Prediction Banner -->
+    <div class="ml-banner">
+        <div class="ml-badge-icon">🤖</div>
+        <div class="ml-details">
+            <h4>AI Classifier Prediction (Concept 3)</h4>
+            <p>Based on machine learning classification models trained on historical student profiles, your profile has a <strong>{{ results.ml_confidence }}% confidence fit</strong> for degrees in <strong>{{ results.ml_predicted_category }}</strong>.</p>
+        </div>
+    </div>
+
+    <!-- Section: Top Degree Recommendations -->
+    <div class="section-header">
+        🎓 Top Recommended Degree Programmes
+    </div>
+
+    {% for degree in results.top_recommendations %}
+    <div class="degree-card">
+        <div class="degree-header">
+            <div>
+                <span class="rank-badge">RANK #{{ loop.index }} MATCH</span>
+                <h3 class="degree-title">{{ degree.degree_name }}</h3>
+                <div class="uni-tag">🏛️ {{ degree.university }} <span style="color: var(--text-muted); font-size: 0.85rem;">({{ degree.university_type }})</span></div>
+            </div>
+            <div class="match-score-box">
+                <div class="match-score-val">{{ degree.match_percentage }}%</div>
+                <div class="match-score-lbl">Compatibility</div>
+            </div>
+        </div>
+
+        <!-- AI Rule & Scoring Explanation -->
+        <div class="explanation-box">
+            <div class="explanation-title">💡 Why is this degree recommended for you?</div>
+            <ul class="reason-list">
+                {% for reason in degree.explanations %}
+                <li>{{ reason }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Career Paths & Recommended Skills -->
+        <div class="details-grid">
+            <div class="detail-block">
+                <h5>Possible Career Outcomes</h5>
+                <div class="tag-cloud">
+                    {% for career in degree.career_paths %}
+                    <span class="chip-tag">💼 {{ career }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="detail-block">
+                <h5>Recommended Skills to Build</h5>
+                <div class="tag-cloud">
+                    {% for skill in degree.recommended_skills_to_build %}
+                    <span class="chip-tag chip-skill">🚀 {{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="footer">
+        <p>AI-Based Smart Degree Recommendation & Academic Advising System for Sri Lankan A/L Students</p>
+        <p>Essentials of Artificial Intelligence Group Assignment | Intake 41 & 42</p>
+    </div>
+</div>
+
+</body>
+</html>
